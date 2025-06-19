@@ -55,7 +55,7 @@ const ShowcaseSection = () => {
                 On-Demand Rides Made Simple with a Powerful, User-Friendly App
                 called Ryde
               </h2>
-              <p className="text-white-50 md:text-xl">
+              <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl">
                 An app built with React Native, Expo, & TailwindCSS for a fast,
                 user-friendly experience.
               </p>

@@ -6,16 +6,21 @@ const AnimatedCounter = () => {
     <div id="counter" className="padding-x-lg xl:mt-0 mt-32">
       <div className="mx-auto grid-3-cols">
         {counterItems.map((item) => (
-          <div className="bg-zinc-900 rounded-lg p-10 flex flex-col justify-center">
-            <div key={counterItems.label} className="counter-number text-white text-5xl font-bold mb-2">
+          <div
+            key={item.label}
+            className="rounded-lg p-10 flex flex-col justify-center bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)] ring-1 ring-[var(--navbar-ring)]"
+          >
+            <div className="counter-number text-5xl font-bold mb-2 text-[var(--text-primary)] dark:text-[var(--text-primary)]">
               <CountUp suffix={item.suffix} end={item.value} />
             </div>
-            <div className="text-white-50 text-lg">{item.label}</div>
+            <div className="text-lg text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
+              {item.label}
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default AnimatedCounter;

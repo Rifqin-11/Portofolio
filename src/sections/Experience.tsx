@@ -1,3 +1,4 @@
+import React from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,14 +12,14 @@ gsap.registerPlugin(ScrollTrigger);
 const ExperienceSection = () => {
   useGSAP(() => {
     gsap.utils.toArray(".timeline-card").forEach((card) => {
-      gsap.from(card, {
+      gsap.from(card as Element, {
         xPercent: -100,
         opacity: 0,
         transformOrigin: "left left",
         duration: 1,
         ease: "power2.inOut",
         scrollTrigger: {
-          trigger: card,
+          trigger: card as Element,
           start: "top 80%",
         },
       });
@@ -40,22 +41,23 @@ const ExperienceSection = () => {
     });
 
     gsap.utils.toArray(".expText").forEach((text) => {
-      gsap.from(text, {
+      gsap.from(text as Element, {
         opacity: 0,
         xPercent: 0,
         duration: 1,
         ease: "power2.inOut",
         scrollTrigger: {
-          trigger: text,
+          trigger: text as Element,
           start: "top 60%",
         },
       });
     }, "<");
   }, []);
+
   return (
     <section
       id="experience"
-      className="w-full md:mt-40 mt-20 section-padding xl:px-0"
+      className="w-full md:mt-40 mt-20 section-padding xl:px-0 bg-[var(--bg-primary)] dark:bg-[var(--bg-primary)]"
     >
       <div className="w-full h-full md:px-20 px-5">
         <TitleHeader
@@ -65,10 +67,10 @@ const ExperienceSection = () => {
 
         <div className="mt-32 relative">
           <div className="relative z-50 xl:space-y-32 space-y-10">
-            {expCards.map((card, index) => (
+            {expCards.map((card) => (
               <div key={card.title} className="exp-card-wrapper">
                 <div className="xl:w-2/6">
-                  <GlowCard card={card} index={index}>
+                  <GlowCard card={card}>
                     <div>
                       <img src={card.imgPath} alt={card.title} />
                     </div>
@@ -83,25 +85,28 @@ const ExperienceSection = () => {
                     </div>
 
                     <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
-                      <div className="timeline-logo">
+                      <div className="timeline-logo bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]">
                         <img src={card.logoPath} alt="logo" />
                       </div>
                       <div>
-                        <h1 className="font-semibold text-3xl">{card.title}</h1>
-                        <p className="my-5 text-white-50">
+                        <h1 className="font-semibold text-3xl text-[var(--text-primary)] dark:text-[var(--text-primary)]">
+                          {card.title}
+                        </h1>
+                        <p className="my-5 text-lg text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
                           🗓️&nbsp;{card.date}
                         </p>
-                        <p className="text-[#839CB5] italic">
+                        <p className="italic text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
                           Responsibilities
                         </p>
-                        <ul className="list-disc ms-5 mt-5 flex flex-col gap-5 text-white-50">
-                          {card.responsibilities.map(
-                            (responsibility, index) => (
-                              <li key={index} className="text-lg">
-                                {responsibility}
-                              </li>
-                            )
-                          )}
+                        <ul className="list-disc ms-5 mt-5 flex flex-col gap-5">
+                          {card.responsibilities.map((resp, idx) => (
+                            <li
+                              key={idx}
+                              className="text-lg text-[var(--text-secondary)] dark:text-[var(--text-secondary)]"
+                            >
+                              {resp}
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     </div>

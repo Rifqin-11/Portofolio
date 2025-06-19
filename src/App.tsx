@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Hero from "./sections/Hero.tsx";
 import ShowcaseSection from './sections/Showcase.tsx';
 import Navbar from './components/Navbar.tsx';

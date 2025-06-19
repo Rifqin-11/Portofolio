@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { words } from '../constants'
 import Button from '../components/Button';
 import { useGSAP } from '@gsap/react';
@@ -55,7 +55,7 @@ const  Hero = () => {
               </h1>
             </div>
 
-            <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
+            <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl z-10 pointer-events-none">
               3rd year Electrical Engineering student with a passion for code.
             </p>
 
@@ -69,7 +69,7 @@ const  Hero = () => {
 
         {/* Right Layout */}
         <figure className="">
-          <div className="xl:w-[35%] w-[90%] min-h-[50vh] absolute xl:top-1/2 top-130 -translate-y-1/2 left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-40">
+          <div className="xl:w-[35%] md:w-[50%] w-[90%] min-h-[50vh] absolute xl:top-1/2 md:top-150 top-130 -translate-y-1/2 left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-40">
             <img
               src="/images/profile.png"
               alt="Profile"

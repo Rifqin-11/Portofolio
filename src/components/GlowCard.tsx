@@ -1,6 +1,12 @@
 import { useRef } from "react";
 
-const GlowCard = ({ card, index, children }) => {
+interface GlowCardProps {
+  card: { review: string }; // Adjust this type according to the actual shape of 'card'
+  index: number;
+  children?: React.ReactNode;
+}
+
+const GlowCard = ({ card, index, children }: GlowCardProps) => {
   const cardRefs = useRef([]);
 
   const handleMouseMove = (index) => (e) => {
@@ -22,7 +28,7 @@ const GlowCard = ({ card, index, children }) => {
     <div
       ref={(el) => (cardRefs.current[index] = el)}
       onMouseMove={handleMouseMove(index)}
-      className="card card-border timeline-card rounded-xl p-10 mb-5 break-inside-avoid-column"
+      className="card card-border timeline-card rounded-xl p-10 mb-5 break-inside-avoid-column bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]"
     >
       <div className="glow"></div>
       <div className="flex items-center gap-1 mb-5">
@@ -31,7 +37,7 @@ const GlowCard = ({ card, index, children }) => {
         ))}
       </div>
       <div className="mb-5">
-        <p className="text-white-50 text-lg">{card.review}</p>
+        <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] text-lg">{card.review}</p>
       </div>
       {children}
     </div>
