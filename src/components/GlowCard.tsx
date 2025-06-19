@@ -7,10 +7,16 @@ interface GlowCardProps {
 }
 
 const GlowCard = ({ card, index, children }: GlowCardProps) => {
-  const cardRefs = useRef([]);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  const handleMouseMove = (index) => (e) => {
-    const card = cardRefs.current[index];
+  interface MouseMoveEvent extends React.MouseEvent<HTMLDivElement, MouseEvent> {}
+
+  type CardRef = HTMLDivElement | null;
+
+  type HandleMouseMove = (index: number) => (e: MouseMoveEvent) => void;
+
+  const handleMouseMove: HandleMouseMove = (index) => (e) => {
+    const card = cardRefs.current[index] as HTMLDivElement | undefined;
     if (!card) return;
 
     const rect = card.getBoundingClientRect();
@@ -21,12 +27,14 @@ const GlowCard = ({ card, index, children }: GlowCardProps) => {
 
     angle = (angle + 360) % 360;
 
-    card.style.setProperty("--start", angle + 60);
+    card.style.setProperty("--start", (angle + 60).toString());
   };
 
   return (
     <div
-      ref={(el) => (cardRefs.current[index] = el)}
+      ref={(el) => {
+        cardRefs.current[index] = el;
+      }}
       onMouseMove={handleMouseMove(index)}
       className="card card-border timeline-card rounded-xl p-10 mb-5 break-inside-avoid-column bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]"
     >
@@ -37,7 +45,9 @@ const GlowCard = ({ card, index, children }: GlowCardProps) => {
         ))}
       </div>
       <div className="mb-5">
-        <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] text-lg">{card.review}</p>
+        <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] text-lg">
+          {card.review}
+        </p>
       </div>
       {children}
     </div>
