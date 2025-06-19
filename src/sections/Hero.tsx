@@ -68,9 +68,13 @@ const  Hero = () => {
         </header>
 
         {/* Right Layout */}
-        <figure>
-          <div className="xl:w-[35%] w-full h-full min-h-[50vh] absolute xl:top-25 top-24 xl:right-40 right-0">
-            <img src="/images/profile.png" alt=""  />
+        <figure className="">
+          <div className="xl:w-[35%] w-[90%] min-h-[50vh] absolute xl:top-1/2 top-130 -translate-y-1/2 left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-40">
+            <img
+              src="/images/profile.png"
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
           </div>
         </figure>
       </div>
