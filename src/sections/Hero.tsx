@@ -1,4 +1,3 @@
-import React from "react";
 import { words } from '../constants'
 import Button from '../components/Button';
 import { useGSAP } from '@gsap/react';

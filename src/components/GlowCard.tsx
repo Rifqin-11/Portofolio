@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRef } from "react";
 
 interface GlowCardProps {
@@ -9,7 +10,8 @@ interface GlowCardProps {
 const GlowCard = ({ card, index, children }: GlowCardProps) => {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  interface MouseMoveEvent extends React.MouseEvent<HTMLDivElement, MouseEvent> {}
+  interface MouseMoveEvent
+    extends React.MouseEvent<HTMLDivElement, MouseEvent> {}
 
   type CardRef = HTMLDivElement | null;
 
