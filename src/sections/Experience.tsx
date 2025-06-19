@@ -84,16 +84,25 @@ const ExperienceSection = () => {
                     </div>
 
                     <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
-                      <div className="timeline-logo bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]">
-                        <img src={card.logoPath} alt="logo" />
-                      </div>
+                      {card.logoPath ? (
+                        <div className="timeline-logo bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]">
+                          <img src={card.logoPath} alt="logo" />
+                        </div>
+                      ) : (
+                        <div className="md:size-20 size-10 flex-none rounded-full flex justify-center items-center md:-translate-y-7"></div>
+                      )}
                       <div>
                         <h1 className="font-semibold text-3xl text-[var(--text-primary)] dark:text-[var(--text-primary)]">
                           {card.title}
                         </h1>
-                        <p className="my-5 text-lg text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
-                          🗓️&nbsp;{card.date}
-                        </p>
+                        <a
+                          href={card.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex my-5 text-lg text-[var(--text-secondary)] dark:text-[var(--text-secondary)]"
+                        >
+                          🔗&nbsp;{card.link}
+                        </a>
                         <p className="italic text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
                           Responsibilities
                         </p>

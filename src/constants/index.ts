@@ -149,39 +149,66 @@ const techStackIcons = [
 
 const expCards = [
   {
-    review: "Adrian brought creativity and technical expertise to the team, significantly improving our frontend performance. His work has been invaluable in delivering faster experiences.",
+    review:
+      "Siap Undip Schedule is an unofficial web app allowing students to view their course timetables. It provides a key solution for iPhone users, as the official 'Siap Undip' app is only on Android.",
     imgPath: "/images/exp1.png",
     logoPath: "/images/logo1.png",
-    title: "Frontend Developer",
-    date: "January 2023 - Present",
+    title: "Siap Undip Schedule",
+    link: "https://github.com/Rifqin-11/SiapUndipSchedule",
     responsibilities: [
-      "Developed and maintained user-facing features for the Hostinger website.",
-      "Collaborated closely with UI/UX designers to ensure seamless user experiences.",
-      "Optimized web applications for maximum speed and scalability.",
+      "Designed, developed, and deployed the 'Siap Undip Schedule' web application from concept to launch.",
+      "Created a responsive and intuitive UI/UX focused on simplicity for a seamless cross-device user experience.",
+      "Solved a critical accessibility problem for iOS users by building a functional, web-based scheduling solution.",
     ],
   },
   {
-    review: "Adrian’s contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
-    imgPath: "/images/exp2.png",
-    logoPath: "/images/logo2.png",
-    title: "Full Stack Developer",
-    date: "June 2020 - December 2023",
-    responsibilities: [
-      "Led the development of Docker's web applications, focusing on scalability.",
-      "Worked with backend engineers to integrate APIs seamlessly with the frontend.",
-      "Contributed to open-source projects that were used with the Docker ecosystem.",
-    ],
-  },
-  {
-    review: "Adrian’s work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
+    review:
+      "PLN Calculator is a web application designed to help the public efficiently plan their electricity consumption and calculate lighting requirements based on Indonesian PLN standards.",
     imgPath: "/images/exp3.png",
     logoPath: "/images/logo3.png",
-    title: "React Native Developer",
-    date: "March 2019 - May 2020",
+    title: "PLN Calculator",
+    link: "https://github.com/Rifqin-11/PLNCalculator",
     responsibilities: [
-      "Built cross-platform mobile apps using React Native, integrating with Appwrite's backend services.",
-      "Improved app performance and user experience through code optimization and testing.",
-      "Coordinated with the product team to implement features based on feedback.",
+      "Developed a fully responsive web application, ensuring optimal functionality and user experience on both desktop and mobile devices.",
+      "Engineered the core calculation algorithms for the three main features: electricity cost estimation, lamp quantity requirements, and lighting level (lux) standards.",
+      "Implemented front-end optimization techniques to improve application performance, resulting in faster load times and more efficient calculations.",
+    ],
+  },
+  {
+    review:
+      "The 'Sitita Teknik Elektro' redesign transformed the department's legacy academic portal into a modern, user-friendly, and responsive platform. The updated technology stack resulted in significantly better performance, scalability, and efficiency in handling user requests.",
+    imgPath: "/images/exp3.png",
+    title: "Sitita Teknik Elektro",
+    link: "https://github.com/Rifqin-11/Sitita",
+    responsibilities: [
+      "Redesigned the complete User Interface (UI) and User Experience (UX) from the ground up, applying modern, user-centered design principles.",
+      "Rebuilt the entire front-end application using a modern tech stack React.js to improve performance, interactivity, and maintainability.",
+      "Significantly improved application performance by optimizing data fetching processes and reducing page load times.",
+    ],
+  },
+  {
+    review:
+      "This Netflix Clone is a personal portfolio project developed to showcase advanced skills in modern front-end development and API integration.",
+    imgPath: "/images/exp3.png",
+    title: "Netflix Clone",
+    link: "https://github.com/Rifqin-11/NetflixClone",
+    responsibilities: [
+      "Developed a pixel-perfect User Interface (UI) replicating the Netflix design aesthetic",
+      "Integrated The Movie Database (TMDb) API to dynamically fetch and display real-time movie and TV show data across the application.",
+      "Implemented a feature to display detailed movie information and stream trailers upon user interaction",
+    ],
+  },
+  {
+    review:
+      "EmployeeWeb is a web-based administration system that allows employees to manage visitor records efficiently.",
+    imgPath: "/images/exp2.png",
+    logoPath: "/images/logo2.png",
+    title: "EmployeeWeb - Visitor Management System",
+    link: "https://github.com/Rifqin-11/EmployeeWeb",
+    responsibilities: [
+      "Led the end-to-end development lifecycle of the EmployeeWeb system",
+      "Designed the complete user interface (UI) and user experience (UX), focusing on creating a clean, intuitive, and efficient workflow for all employees.",
+      "Contributed to back-end logic and database structure, including the implementation of the real-time analytics dashboard.",
     ],
   },
 ];
