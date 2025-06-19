@@ -51,13 +51,12 @@ const ShowcaseSection = () => {
               <img src="/images/project1.png" alt="Ryde App Interface" />
             </div>
             <div className="text-content">
-              <h2>
-                On-Demand Rides Made Simple with a Powerful, User-Friendly App
-                called Ryde
-              </h2>
+              <h2 className="2xl:text-4xl xl:text-3xl text-2xl">EmployeeWeb - Visitor Management System</h2>
               <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl">
-                An app built with React Native, Expo, & TailwindCSS for a fast,
-                user-friendly experience.
+                EmployeeWeb is a web-based administration system that allows
+                employees to manage visitor records efficiently. With this
+                system. This project is built using CodeIgniter 4 and Tailwind
+                CSS, ensuring a clean and responsive UI.
               </p>
             </div>
           </div>
@@ -71,14 +70,14 @@ const ShowcaseSection = () => {
                   alt="Library Management Platform"
                 />
               </div>
-              <h2>The Library Management Platform</h2>
+              <h2>PLN Calculator</h2>
             </div>
 
             <div className="project" ref={ycDirectoryRef}>
               <div className="image-wrapper bg-[#FFE7EB]">
                 <img src="/images/project3.png" alt="YC Directory App" />
               </div>
-              <h2>YC Directory - A Startup Showcase App</h2>
+              <h2>Siap Undip Schedule</h2>
             </div>
           </div>
         </div>
