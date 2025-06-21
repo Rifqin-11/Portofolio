@@ -178,7 +178,7 @@ const expCards = [
       "EmployeeWeb is a web-based administration system that allows employees to manage visitor records efficiently.",
     imgPath: "/images/exp2.png",
     logoPath: "/images/logo2.png",
-    title: "EmployeeWeb - Visitor Management System",
+    title: "Visitor Management System | Internship at PT Des Teknologi Informasi",
     link: "https://github.com/Rifqin-11/EmployeeWeb",
     responsibilities: [
       "Led the end-to-end development lifecycle of the EmployeeWeb system",

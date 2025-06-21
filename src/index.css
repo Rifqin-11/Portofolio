@@ -123,7 +123,7 @@ section {
   }
 
   .hero-text {
-    @apply flex flex-col justify-center md:text-[50px] text-[30px] font-semibold relative z-10 pointer-events-none;
+    @apply flex flex-col justify-center 2xl:text-[50px] md:text-[40px]  text-[30px] font-semibold relative z-10 pointer-events-none;
     img {
       @apply size-8 md:size-10 object-contain;
     }
@@ -478,7 +478,7 @@ section {
   height: 100%;
   position: absolute;
   overflow: hidden;
-  animation: marquee 60s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 .marquee-item {
   float: left;

@@ -39,7 +39,7 @@ const  Hero = () => {
                     {words.map((word, index) => (
                       <span
                         key={index}
-                        className="flex items-center md:gap-3 gap-1 pb-2"
+                        className="flex items-center md:gap-3 gap-1 pb-4"
                       >
                         <img
                           src={word.imgPath}
@@ -68,7 +68,7 @@ const  Hero = () => {
 
         {/* Right Layout */}
         <figure className="">
-          <div className="xl:w-[35%] md:w-[50%] w-[90%] min-h-[50vh] absolute xl:top-1/2 md:top-150 top-130 -translate-y-1/2 left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-40">
+          <div className="xl:w-[35%] md:w-[50%] w-[90%] min-h-[50vh] absolute xl:top-1/2 md:top-150 top-130 -translate-y-1/2 left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-25">
             <img
               src="/images/profile.png"
               alt="Profile"
