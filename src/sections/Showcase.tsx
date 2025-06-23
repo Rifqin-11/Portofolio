@@ -51,8 +51,15 @@ const ShowcaseSection = () => {
               <img src="/images/project1.png" alt="Ryde App Interface" />
             </div>
             <div className="text-content">
-              <h2 className="2xl:text-4xl xl:text-3xl text-2xl">EmployeeWeb - Visitor Management System</h2>
-              <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl">
+              <a
+                href="https://github.com/Rifqin-11/EmployeeWeb"
+                className="2xl:text-4xl xl:text-3xl md:text-xl lg:text-2xl font-semibold mt-5"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                EmployeeWeb - Visitor Management System
+              </a>
+              <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl mt-5">
                 EmployeeWeb is a web-based administration system that allows
                 employees to manage visitor records efficiently. With this
                 system. This project is built using CodeIgniter 4 and Tailwind
@@ -70,15 +77,64 @@ const ShowcaseSection = () => {
                   alt="Library Management Platform"
                 />
               </div>
-              <h2>PLN Calculator</h2>
+              <a
+                href="https://github.com/Rifqin-11/PLNCalculator"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                PLN Calculator
+              </a>
             </div>
 
             <div className="project" ref={ycDirectoryRef}>
               <div className="image-wrapper bg-[#FFE7EB]">
-                <img src="/images/project3.png" alt="YC Directory App" />
+                <img src="/images/project3.png" alt="Siap Undip Schedule" />
               </div>
-              <h2>Siap Undip Schedule</h2>
+              <a
+                href="https://github.com/Rifqin-11/SiapUndipSchedule"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Siap Undip Schedule
+              </a>
             </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:flex-row gap-5 mt-10">
+          <div className="project flex flex-col items-start">
+            <div className="image-wrapper bg-[#F1EBFF] rounded-2xl w-full h-[400px] flex items-center justify-center overflow-hidden">
+              <img
+                src="/images/project5.png"
+                alt="Netflix Clone"
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <a
+              className="text-lg md:text-xl lg:text-2xl font-semibold mt-5"
+              href="https://github.com/Rifqin-11/NetflixClone"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Netflix Clone
+            </a>
+          </div>
+
+          <div className="project flex flex-col items-start">
+            <div className="image-wrapper bg-[#E6FFF7] rounded-2xl w-full h-[400px] flex items-center justify-center overflow-hidden">
+              <img
+                src="/images/project4.png"
+                alt="Sitita Teknik Elektro"
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <a
+              className="text-lg md:text-xl lg:text-2xl font-semibold mt-5"
+              href="https://github.com/Rifqin-11/Sitita"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Sitita Teknik Elektro
+            </a>
           </div>
         </div>
       </div>

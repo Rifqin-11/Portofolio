@@ -60,7 +60,7 @@ const ExperienceSection = () => {
     >
       <div className="w-full h-full md:px-20 px-5">
         <TitleHeader
-          title="Project Develop Experience"
+          title="Project Experience"
           sub="💼 My Career Overview"
         />
 
@@ -70,9 +70,13 @@ const ExperienceSection = () => {
               <div key={card.title} className="exp-card-wrapper">
                 <div className="xl:w-2/6">
                   <GlowCard card={card} index={idx}>
-                    <div>
-                      <img src={card.imgPath} alt={card.title} />
-                    </div>
+                    {card.imgPath ? (
+                      <div>
+                        <img src={card.imgPath} alt={card.title} />
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
                   </GlowCard>
                 </div>
 
@@ -95,14 +99,9 @@ const ExperienceSection = () => {
                         <h1 className="font-semibold text-3xl text-[var(--text-primary)] dark:text-[var(--text-primary)]">
                           {card.title}
                         </h1>
-                        <a
-                          href={card.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex my-5 text-lg text-[var(--text-secondary)] dark:text-[var(--text-secondary)]"
-                        >
-                          🔗&nbsp;{card.link}
-                        </a>
+                        <p className="flex my-5 text-lg text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
+                          📅&nbsp;{card.date}
+                        </p>
                         <p className="italic text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
                           Responsibilities
                         </p>

@@ -125,65 +125,41 @@ const techStackIcons = [
 const expCards = [
   {
     review:
-      "Siap Undip Schedule is an unofficial web app allowing students to view their course timetables. It provides a key solution for iPhone users, as the official 'Siap Undip' app is only on Android.",
-    imgPath: "/images/exp1.png",
-    logoPath: "/images/logo1.png",
-    title: "Siap Undip Schedule",
-    link: "https://github.com/Rifqin-11/SiapUndipSchedule",
-    responsibilities: [
-      "Designed, developed, and deployed the 'Siap Undip Schedule' web application from concept to launch.",
-      "Created a responsive and intuitive UI/UX focused on simplicity for a seamless cross-device user experience.",
-      "Solved a critical accessibility problem for iOS users by building a functional, web-based scheduling solution.",
-    ],
-  },
-  {
-    review:
-      "PLN Calculator is a web application designed to help the public efficiently plan their electricity consumption and calculate lighting requirements based on Indonesian PLN standards.",
-    imgPath: "/images/exp3.png",
-    logoPath: "/images/logo3.png",
-    title: "PLN Calculator",
-    link: "https://github.com/Rifqin-11/PLNCalculator",
-    responsibilities: [
-      "Developed a fully responsive web application, ensuring optimal functionality and user experience on both desktop and mobile devices.",
-      "Engineered the core calculation algorithms for the three main features: electricity cost estimation, lamp quantity requirements, and lighting level (lux) standards.",
-      "Implemented front-end optimization techniques to improve application performance, resulting in faster load times and more efficient calculations.",
-    ],
-  },
-  {
-    review:
-      "The 'Sitita Teknik Elektro' redesign transformed the department's legacy academic portal into a modern, user-friendly, and responsive platform. The updated technology stack resulted in significantly better performance, scalability, and efficiency in handling user requests.",
-    imgPath: "/images/exp3.png",
-    title: "Sitita Teknik Elektro",
-    link: "https://github.com/Rifqin-11/Sitita",
-    responsibilities: [
-      "Redesigned the complete User Interface (UI) and User Experience (UX) from the ground up, applying modern, user-centered design principles.",
-      "Rebuilt the entire front-end application using a modern tech stack React.js to improve performance, interactivity, and maintainability.",
-      "Significantly improved application performance by optimizing data fetching processes and reducing page load times.",
-    ],
-  },
-  {
-    review:
-      "This Netflix Clone is a personal portfolio project developed to showcase advanced skills in modern front-end development and API integration.",
-    imgPath: "/images/exp3.png",
-    title: "Netflix Clone",
-    link: "https://github.com/Rifqin-11/NetflixClone",
-    responsibilities: [
-      "Developed a pixel-perfect User Interface (UI) replicating the Netflix design aesthetic",
-      "Integrated The Movie Database (TMDb) API to dynamically fetch and display real-time movie and TV show data across the application.",
-      "Implemented a feature to display detailed movie information and stream trailers upon user interaction",
-    ],
-  },
-  {
-    review:
-      "EmployeeWeb is a web-based administration system that allows employees to manage visitor records efficiently.",
+      "Developed a secure Visitor Management System web app, replacing an inefficient Google Form to streamline data handling and enhance the professional user experience.",
     imgPath: "/images/exp2.png",
-    logoPath: "/images/logo2.png",
-    title: "Visitor Management System | Internship at PT Des Teknologi Informasi",
-    link: "https://github.com/Rifqin-11/EmployeeWeb",
+    logoPath: "/images/logo1.png",
+    title: "Web Developer Intern | PT Des Teknologi Informasi",
+    date: "Jan 2025 - Feb 2025",
     responsibilities: [
       "Led the end-to-end development lifecycle of the EmployeeWeb system",
       "Designed the complete user interface (UI) and user experience (UX), focusing on creating a clean, intuitive, and efficient workflow for all employees.",
       "Contributed to back-end logic and database structure, including the implementation of the real-time analytics dashboard.",
+    ],
+  },
+  {
+    review:
+      "I directed the division responsible for all technical training and IT-focused coaching clinics. My role was to plan and deliver workshops that provided practical, in-demand technology skills to electrical engineering students, managing all aspects from concept to successful execution.",
+    imgPath: "",
+    logoPath: "/images/logo3.png",
+    title: "Head of Training Division | BKTI, Diponegoro University",
+    date: "Jun 2025 - Present",
+    responsibilities: [
+      "Directed the strategic planning and execution of all technical training programs for students in the IT concentration.",
+      "Recruited and coordinated with industry professionals, senior students, and faculty to act as trainers and mentors.",
+      "Managed all event logistics, including technical requirements, promotional campaigns, and participant registration.",
+    ],
+  },
+  {
+    review:
+      "As a member of the Media and Information Division, I handled photo/video documentation for events, designed visuals to boost social media engagement, and produced a farewell video for a major ceremony.",
+    imgPath: "",
+    logoPath: "/images/logo2.png",
+    title: "Documentation Staff | HME, Diponegoro University",
+    date: "Apr 2024 - Apr 2025",
+    responsibilities: [
+      "Executed photo and video documentation for all organizational events.",
+      "Created engaging graphic designs and visual content for social media platforms.",
+      "Produced and edited a commemorative video presentation for the annual farewell ceremony.",
     ],
   },
 ];
@@ -252,18 +228,22 @@ const socialImgs = [
   {
     name: "insta",
     imgPath: "/images/insta.png",
-  },
-  {
-    name: "fb",
-    imgPath: "/images/fb.png",
+    link: "https://www.instagram.com/rifqin11_/",
   },
   {
     name: "x",
     imgPath: "/images/x.png",
+    link: "https://x.com/rifqin11_",
   },
   {
     name: "linkedin",
     imgPath: "/images/linkedin.png",
+    link: "https://www.linkedin.com/in/rifqin11/",
+  },
+  {
+    name: "github",
+    imgPath: "/images/github.png",
+    link: "https://github.com/Rifqin-11",
   },
 ];
 
