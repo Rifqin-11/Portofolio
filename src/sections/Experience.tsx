@@ -60,7 +60,7 @@ const ExperienceSection = () => {
     >
       <div className="w-full h-full md:px-20 px-5">
         <TitleHeader
-          title="Project Experience"
+          title="Project & Organizational Experience"
           sub="💼 My Career Overview"
         />
 
