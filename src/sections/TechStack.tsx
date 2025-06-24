@@ -44,13 +44,13 @@ const TechStack = () => {
               key={index}
               className="card-border tech-card overflow-hidden group xl:rounded-2xl rounded-xl bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]"
             >
-              <div className="tech-card-animated-bg bg-[#2D3240]" />
+              <div className="tech-card-animated-bg bg-[#2D3240] text-white" />
               <div className="tech-card-content">
                 <div className="tech-icon-wrapper">
                   <img src={techStackIcon.imgPath} alt="" className="w-15" />
                 </div>
                 <div className="padding-x w-full ">
-                  <p className="text-[var(--text-primary)] dark:text-[var(--text-primary)]">
+                  <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">
                     {techStackIcon.name}
                   </p>
                 </div>
