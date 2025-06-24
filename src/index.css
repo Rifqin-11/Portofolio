@@ -474,10 +474,10 @@ section {
 .marquee-box {
   display: flex;
   align-items: center;
-  width: 200%;
+
   height: 100%;
   position: absolute;
-  overflow: hidden;
+
   animation: marquee 30s linear infinite;
 }
 .marquee-item {
