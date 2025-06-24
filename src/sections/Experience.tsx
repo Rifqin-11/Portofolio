@@ -90,7 +90,11 @@ const ExperienceSection = () => {
                     <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
                       {card.logoPath ? (
                         <div className="timeline-logo bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]">
-                          <img src={card.logoPath} alt="logo" />
+                          <img
+                            src={card.logoPath}
+                            alt="logo"
+                            className="rounded-full object-cover"
+                          />
                         </div>
                       ) : (
                         <div className="md:size-20 size-10 flex-none rounded-full flex justify-center items-center md:-translate-y-7"></div>

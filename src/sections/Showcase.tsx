@@ -100,7 +100,7 @@ const ShowcaseSection = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:flex-row gap-5 mt-10">
+        <div className="flex-row md:grid xl:grid-cols-2 gap-5 space-y-10 mt-10">
           <div className="project flex flex-col items-start">
             <div className="image-wrapper bg-[#F1EBFF] rounded-2xl w-full h-[400px] flex items-center justify-center overflow-hidden">
               <img
@@ -110,7 +110,7 @@ const ShowcaseSection = () => {
               />
             </div>
             <a
-              className="text-lg md:text-xl lg:text-2xl font-semibold mt-5"
+              className="text-lg md:text-xl lg:text-2xl font-semibold"
               href="https://github.com/Rifqin-11/NetflixClone"
               target="_blank"
               rel="noopener noreferrer"
@@ -128,7 +128,7 @@ const ShowcaseSection = () => {
               />
             </div>
             <a
-              className="text-lg md:text-xl lg:text-2xl font-semibold mt-5"
+              className="text-lg md:text-xl lg:text-2xl font-semibold"
               href="https://github.com/Rifqin-11/Sitita"
               target="_blank"
               rel="noopener noreferrer"

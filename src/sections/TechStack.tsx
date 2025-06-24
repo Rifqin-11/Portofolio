@@ -36,25 +36,23 @@ const TechStack = () => {
 
   return (
     <div id="skills" className="flex-center section-padding">
-      <div className="w-full h-full md:px-10 px-5">
-        <TitleHeader
-          title="How I Can Contribute & My Key Skills"
-          sub="🤝 What I Bring to the Table"
-        />
+      <div className="w-full md:px-10 px-5">
+        <TitleHeader title="My Skills" sub="🤝 What I Bring to the Table" />
         <div className="tech-grid">
-          {/* This is for the img part */}
           {techStackImgs.map((techStackIcon, index) => (
             <div
               key={index}
-              className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg"
+              className="card-border tech-card overflow-hidden group xl:rounded-2xl rounded-xl bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]"
             >
-              <div className="tech-card-animated-bg" />
+              <div className="tech-card-animated-bg bg-[#2D3240]" />
               <div className="tech-card-content">
                 <div className="tech-icon-wrapper">
-                  <img src={techStackIcon.imgPath} alt="" />
+                  <img src={techStackIcon.imgPath} alt="" className="w-15" />
                 </div>
-                <div className="padding-x w-full">
-                  <p>{techStackIcon.name}</p>
+                <div className="padding-x w-full ">
+                  <p className="text-[var(--text-primary)] dark:text-[var(--text-primary)]">
+                    {techStackIcon.name}
+                  </p>
                 </div>
               </div>
             </div>
