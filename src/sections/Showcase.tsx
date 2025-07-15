@@ -48,22 +48,23 @@ const ShowcaseSection = () => {
           {/* left */}
           <div ref={rydeRef} className="first-project-wrapper">
             <div className="image-wrapper">
-              <img src="/images/project1.png" alt="Ryde App Interface" />
+              <img src="/images/project6.png" alt="Ryde App Interface" />
             </div>
             <div className="text-content">
               <a
-                href="https://github.com/Rifqin-11/EmployeeWeb"
-                className="2xl:text-4xl xl:text-3xl md:text-xl lg:text-2xl font-semibold mt-5"
+                href="https://splitbill.rifqinaufal11.studio/"
+                className="2xl:text-4xl xl:text-3xl md:text-xl lg:text-2xl font-semibold mt-5 hover:text-gray-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                EmployeeWeb - Visitor Management System
+                Split Bill Web App
               </a>
               <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl mt-5">
-                EmployeeWeb is a web-based administration system that allows
-                employees to manage visitor records efficiently. With this
-                system. This project is built using CodeIgniter 4 and Tailwind
-                CSS, ensuring a clean and responsive UI.
+                Split Bill is a web app that lets users upload a photo of a
+                receipt and automatically splits the bill based on who ordered
+                what. Assign items to each person, get an instant breakdown of
+                costs, and share the payment info with friends. Simple, smart,
+                and perfect for dining out together.
               </p>
             </div>
           </div>
@@ -71,18 +72,19 @@ const ShowcaseSection = () => {
           {/* right */}
           <div className="project-list-wrapper overflow-hidden">
             <div className="project" ref={libraryRef}>
-              <div className="image-wrapper bg-[#FFEFDB]">
+              <div className="image-wrapper bg-[#e4eefe]">
                 <img
-                  src="/images/project2.png"
-                  alt="Library Management Platform"
+                  src="/images/project1.png"
+                  alt="EmployeeWeb - Visitor Management System"
                 />
               </div>
               <a
-                href="https://github.com/Rifqin-11/PLNCalculator"
+                className="hover:text-gray-400"
+                href="https://github.com/Rifqin-11/EmployeeWeb"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                PLN Calculator
+                EmployeeWeb - Visitor Management System
               </a>
             </div>
 
@@ -91,6 +93,7 @@ const ShowcaseSection = () => {
                 <img src="/images/project3.png" alt="Siap Undip Schedule" />
               </div>
               <a
+                className="hover:text-gray-400"
                 href="https://github.com/Rifqin-11/SiapUndipSchedule"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -104,18 +107,18 @@ const ShowcaseSection = () => {
           <div className="project flex flex-col items-start">
             <div className="image-wrapper bg-[#F1EBFF] rounded-2xl w-full h-[400px] flex items-center justify-center overflow-hidden">
               <img
-                src="/images/project5.png"
-                alt="Netflix Clone"
+                src="/images/project2.png"
+                alt="PLN Calculator"
                 className="max-h-full max-w-full object-contain"
               />
             </div>
             <a
-              className="text-lg md:text-xl lg:text-2xl font-semibold"
-              href="https://github.com/Rifqin-11/NetflixClone"
+              href="https://github.com/Rifqin-11/PLNCalculator"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-lg md:text-xl lg:text-2xl font-semibold hover:text-gray-400"
             >
-              Netflix Clone
+              PLN Calculator
             </a>
           </div>
 
@@ -128,7 +131,7 @@ const ShowcaseSection = () => {
               />
             </div>
             <a
-              className="text-lg md:text-xl lg:text-2xl font-semibold"
+              className="text-lg md:text-xl lg:text-2xl font-semibold hover:text-gray-400"
               href="https://github.com/Rifqin-11/Sitita"
               target="_blank"
               rel="noopener noreferrer"

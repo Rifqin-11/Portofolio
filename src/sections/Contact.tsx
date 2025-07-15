@@ -3,14 +3,13 @@ import emailjs from "@emailjs/browser";
 
 import TitleHeader from "../components/TitleHeader";
 
-
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
-    message: "",
+    message: "", 
   });
 
   const handleChange = (
