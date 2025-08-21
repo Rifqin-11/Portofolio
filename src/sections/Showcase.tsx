@@ -71,6 +71,20 @@ const ShowcaseSection = () => {
 
           {/* right */}
           <div className="project-list-wrapper overflow-hidden">
+            <div className="project" ref={ycDirectoryRef}>
+              <div className="image-wrapper bg-[#e8f4f6]">
+                <img src="/images/project3.png" alt="Siap Undip Schedule" />
+              </div>
+              <a
+                className="hover:text-gray-400"
+                href="https://schedule.rifqinaufal11.studio/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Siap Undip Schedule
+              </a>
+            </div>
+            
             <div className="project" ref={libraryRef}>
               <div className="image-wrapper bg-[#e4eefe]">
                 <img
@@ -85,20 +99,6 @@ const ShowcaseSection = () => {
                 rel="noopener noreferrer"
               >
                 EmployeeWeb - Visitor Management System
-              </a>
-            </div>
-
-            <div className="project" ref={ycDirectoryRef}>
-              <div className="image-wrapper bg-[#FFE7EB]">
-                <img src="/images/project3.png" alt="Siap Undip Schedule" />
-              </div>
-              <a
-                className="hover:text-gray-400"
-                href="https://github.com/Rifqin-11/SiapUndipSchedule"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Siap Undip Schedule
               </a>
             </div>
           </div>
