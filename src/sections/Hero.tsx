@@ -1,12 +1,13 @@
-import { words } from '../constants'
-import Button from '../components/Button';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import AnimatedCounter from '../components/AnimatedCounter';
+import { words } from "../constants";
+import Button from "../components/Button";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import AnimatedCounter from "../components/AnimatedCounter";
 
-const  Hero = () => {
+const Hero = () => {
   useGSAP(() => {
-    gsap.fromTo('.hero-text h1',
+    gsap.fromTo(
+      ".hero-text h1",
       {
         y: 50,
         opacity: 0,
@@ -16,10 +17,10 @@ const  Hero = () => {
         opacity: 1,
         stagger: 0.2,
         duration: 1,
-        ease: 'power2.inOut',
+        ease: "power2.inOut",
       }
-    )
-  })
+    );
+  });
   return (
     <section id="hero" className="relative overflow-hidden">
       <div className="absolute top-0 left-0 z-10">
@@ -39,7 +40,7 @@ const  Hero = () => {
                     {words.map((word, index) => (
                       <span
                         key={index}
-                        className="flex items-center md:gap-3 gap-1 pb-4"
+                        className="flex items-center md:gap-3 gap-1"
                       >
                         <img
                           src={word.imgPath}
@@ -80,6 +81,6 @@ const  Hero = () => {
       <AnimatedCounter />
     </section>
   );
-}
+};
 
-export default Hero
+export default Hero;

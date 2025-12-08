@@ -8,7 +8,11 @@
   --text-secondary: #555555;
   --accent-color: #007bff;
   --navbar-scrolled-bg: rgba(255, 255, 255, 0.8);
-  --navbar-not-scrolled-bg: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05));
+  --navbar-not-scrolled-bg: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.05)
+  );
   --navbar-ring: rgba(0, 0, 0, 0.1);
   --contact-btn-bg: #1c1c21;
   --contact-btn-text: #ffffff;
@@ -29,7 +33,11 @@
   --text-secondary: #d9ecff;
   --accent-color: #62e0ff;
   --navbar-scrolled-bg: rgba(0, 0, 0, 0.7);
-  --navbar-not-scrolled-bg: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  --navbar-not-scrolled-bg: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   --navbar-ring: rgba(255, 255, 255, 0.1);
   --contact-btn-bg: #ffffff;
   --contact-btn-text: #000000;
@@ -128,7 +136,7 @@ section {
       @apply size-8 md:size-10 object-contain;
     }
     .slide {
-      @apply absolute pt-0 px-2 md:px-5 py-[30px] h-[48px] md:h-[78px] md:translate-y-1 translate-y-0 overflow-hidden;
+      @apply inline-flex pt-0 px-2 md:px-5 h-[48px] md:h-[78px] align-middle overflow-hidden;
     }
   }
 
@@ -183,7 +191,7 @@ section {
           }
 
           a:hover span {
-             color: var(--nav-link-hover-text);
+            color: var(--nav-link-hover-text);
           }
 
           .underline {
@@ -195,13 +203,13 @@ section {
     }
 
     .theme-toggle-btn {
-        @apply p-2 rounded-full transition-colors duration-300;
-        color: var(--nav-link-text);
+      @apply p-2 rounded-full transition-colors duration-300;
+      color: var(--nav-link-text);
     }
 
     .theme-toggle-btn:hover {
-        background-color: rgba(128, 128, 128, 0.2);
-        color: var(--nav-link-hover-text);
+      background-color: rgba(128, 128, 128, 0.2);
+      color: var(--nav-link-hover-text);
     }
 
     .contact-btn {
@@ -214,7 +222,7 @@ section {
       }
 
       &:hover .inner {
-         background-color: var(--contact-btn-hover-bg);
+        background-color: var(--contact-btn-hover-bg);
       }
 
       span {
@@ -223,7 +231,7 @@ section {
       }
 
       &:hover span {
-         color: var(--contact-btn-hover-text);
+        color: var(--contact-btn-hover-text);
       }
     }
   }
@@ -360,7 +368,7 @@ section {
 
     input,
     textarea {
-      @apply w-full px-4 py-4 md:text-base text-sm placeholder:text-blue-50 bg-blue-100 rounded-md;
+      @apply w-full px-4 py-4 md:text-base text-sm placeholder:text-blue-50 bg-blue-100 rounded-md text-white;
     }
 
     a {
@@ -509,10 +517,9 @@ section {
   border: 2px solid transparent;
   background: var(--gradient);
   background-attachment: fixed;
-  mask:
-    linear-gradient(#0000, #0000),
+  mask: linear-gradient(#0000, #0000),
     conic-gradient(
-      from calc((var(--start,0) - 15) * 1deg),
+      from calc((var(--start, 0) - 15) * 1deg),
       #ffffff1f 0deg,
       white,
       #ffffff00 100deg

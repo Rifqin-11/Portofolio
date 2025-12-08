@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import TitleHeader from "../components/TitleHeader";
+import ContactExperience from "../components/ContactExperience";
+
+import toast from "react-hot-toast";
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -9,7 +12,7 @@ const Contact = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    message: "", 
+    message: "",
   });
 
   const handleChange = (
@@ -34,13 +37,15 @@ const Contact = () => {
 
         // Reset form and stop loading
         setForm({ name: "", email: "", message: "" });
+        toast.success("Message sent successfully!");
       } else {
         throw new Error("Form reference is null.");
       }
     } catch (error) {
-      console.error("EmailJS Error:", error); // Optional: show toast
+      console.error("EmailJS Error:", error);
+      toast.error("Failed to send message. Please try again.");
     } finally {
-      setLoading(false); // Always stop loading, even on error
+      setLoading(false);
     }
   };
 
@@ -52,8 +57,8 @@ const Contact = () => {
           sub="💬 Have questions or ideas? Let’s talk! 🚀"
         />
         <div className="grid-12-cols mt-16">
-          <div className="xl:col-span-5">
-            <div className="flex-center card-border rounded-xl p-10">
+          <div className="xl:col-span-7">
+            <div className="flex-center rounded-xl p-10 bg-[#0e0e10] border border-[#1c1c21]">
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
@@ -112,10 +117,10 @@ const Contact = () => {
               </form>
             </div>
           </div>
-          <div className="xl:col-span-7 min-h-96">
-            {/* <div className="bg-[#cd7c2e] w-full h-full hover:cursor-grab rounded-3xl overflow-hidden">
+          <div className="xl:col-span-5 min-h-96">
+            <div className="w-full h-full hover:cursor-grab flex items-center justify-center">
               <ContactExperience />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
