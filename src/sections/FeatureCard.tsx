@@ -1,9 +1,14 @@
+import TitleHeader from "../components/TitleHeader";
 import { abilities } from "../constants";
 
 const FeatureCard = () => {
   return (
-    <div className="w-full padding-x-lg">
-      <div className="mx-auto grid-3-cols">
+    <div className="w-full padding-x-lg mt-16">
+      <TitleHeader
+          title="Why Hire Me?"
+          sub="🎯 Dedicated, Adaptable, and Driven to Excel"
+        />
+      <div className="mx-auto grid-3-cols mt-16">
         {abilities.map(({ imgPath, title, desc }) => (
           <div
             key={title}

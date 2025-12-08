@@ -7,7 +7,6 @@ import ExperienceSection from "./sections/Experience";
 import TechStack from "./sections/TechStack";
 import Footer from "./sections/Footer";
 
-import About from "./sections/About";
 import Contact from "./sections/Contact";
 
 import { Toaster } from "react-hot-toast";
@@ -18,7 +17,6 @@ const App = () => {
       <Toaster />
       <Navbar />
       <Hero />
-      <About />
       <ShowcaseSection />
       <LogoSection />
       <FeatureCard />
