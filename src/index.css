@@ -260,9 +260,18 @@ section {
       @apply flex;
 
       .inner {
-        @apply px-5 py-2 rounded-lg transition-colors duration-300;
+        @apply flex size-10 items-center justify-center rounded-full xl:rounded-lg transition-colors duration-300 md:h-auto md:w-auto md:px-5 md:py-2;
         background-color: var(--contact-btn-bg);
         color: var(--contact-btn-text);
+      }
+
+      img {
+        @apply size-5 object-contain md:hidden;
+        filter: invert(0);
+      }
+
+      .inner:hover img {
+        filter: brightness(0);
       }
 
       &:hover .inner {
@@ -271,7 +280,7 @@ section {
 
       span {
         color: var(--contact-btn-text);
-        @apply transition-colors duration-300;
+        @apply hidden transition-colors duration-300 md:inline;
       }
 
       &:hover span {
@@ -403,7 +412,7 @@ section {
   }
 
   .tech-grid {
-    @apply grid xl:grid-cols-6 md:grid-cols-3 grid-cols-1 xl:gap-16 md:gap-10 gap-5 mt-16;
+    @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 xl:gap-16 md:gap-10 gap-5 mt-16;
   }
 
   .tech-icon-wrapper {

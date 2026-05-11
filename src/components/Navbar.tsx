@@ -1,6 +1,21 @@
 import { useState, useEffect } from "react";
 import { navLinks } from "../constants";
 
+type Theme = "light" | "dark";
+
+const getPreferredTheme = (): Theme => {
+  if (typeof window === "undefined") return "light";
+
+  const storedTheme = localStorage.getItem("theme");
+  if (storedTheme === "light" || storedTheme === "dark") {
+    return storedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
 // Anda bisa menggunakan ikon SVG untuk tampilan yang lebih baik
 const SunIcon = () => (
   <svg
@@ -44,11 +59,7 @@ const MoonIcon = () => (
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
-
-  const [theme, setTheme] = useState(() => {
-    const storedTheme = localStorage.getItem("theme");
-    return storedTheme || "dark";
-  });
+  const [theme, setTheme] = useState<Theme>(getPreferredTheme);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -106,6 +117,7 @@ const NavBar = () => {
 
           <a href="#contact" className="contact-btn group">
             <div className="inner">
+              <img src="/images/contact.svg" alt="" aria-hidden="true" />
               <span>Contact me</span>
             </div>
           </a>

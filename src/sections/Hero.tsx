@@ -56,7 +56,7 @@ const Hero = () => {
             </div>
 
             <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl z-10 pointer-events-none">
-              3rd year Electrical Engineering student with a passion for code.
+              Final year Electrical Engineering student with a passion for code.
             </p>
 
             <Button
