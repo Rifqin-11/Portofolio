@@ -236,7 +236,7 @@ const socialImgs = [
   },
   {
     name: "x",
-    imgPath: "/images/x.png",
+    imgPath: "/images/Twitter X Icon.svg",
     link: "https://x.com/rifqin11_",
   },
   {

@@ -24,6 +24,19 @@
   --underline-bg: #1c1c21;
   --gradient-edge-start: rgba(255, 255, 255, 1);
   --timeline-bg: #ffffff;
+  --surface-card: #f8fafc;
+  --surface-card-border: rgba(28, 28, 33, 0.12);
+  --surface-card-hover: #eef2f7;
+  --field-bg: #ffffff;
+  --field-text: #1c1c21;
+  --field-placeholder: #6b8198;
+  --field-border: rgba(28, 28, 33, 0.1);
+  --tech-hover-bg: #e6f4ff;
+  --footer-bg: #f8fafc;
+  --footer-name: rgba(28, 28, 33, 0.12);
+  --footer-divider: rgba(28, 28, 33, 0.16);
+  --social-icon-filter: brightness(0);
+  --social-icon-x-filter: brightness(0);
 }
 
 .dark {
@@ -49,6 +62,19 @@
   --underline-bg: #ffffff;
   --gradient-edge-start: rgba(0, 0, 0, 1);
   --timeline-bg: #000000;
+  --surface-card: #0e0e10;
+  --surface-card-border: #1c1c21;
+  --surface-card-hover: #1c1c21;
+  --field-bg: #2d2d38;
+  --field-text: #ffffff;
+  --field-placeholder: #839cb5;
+  --field-border: transparent;
+  --tech-hover-bg: #2d3240;
+  --footer-bg: #0e0e10;
+  --footer-name: rgba(255, 255, 255, 0.18);
+  --footer-divider: rgba(255, 255, 255, 0.18);
+  --social-icon-filter: none;
+  --social-icon-x-filter: invert(1);
 }
 
 html,
@@ -131,12 +157,29 @@ section {
   }
 
   .hero-text {
-    @apply flex flex-col justify-center 2xl:text-[50px] md:text-[40px]  text-[30px] font-semibold relative z-10 pointer-events-none;
+    --hero-word-height: 1.25em;
+    @apply flex flex-col justify-center 2xl:text-[50px] md:text-[40px] text-[30px] font-semibold relative z-10 pointer-events-none;
+    line-height: 1.2;
+
+    h1 {
+      @apply leading-[1.2];
+    }
+
     img {
       @apply size-8 md:size-10 object-contain;
     }
+
     .slide {
-      @apply inline-flex pt-0 px-2 md:px-5 h-[48px] md:h-[78px] align-middle overflow-hidden;
+      @apply inline-flex px-2 md:px-5 align-bottom overflow-hidden;
+      height: var(--hero-word-height);
+      vertical-align: bottom;
+      transform: translateY(0.05em);
+    }
+
+    .wrapper > span {
+      height: var(--hero-word-height);
+      flex: 0 0 var(--hero-word-height);
+      line-height: 1;
     }
   }
 
@@ -145,7 +188,8 @@ section {
   }
 
   .hero-badge {
-    @apply bg-black-200 py-2 px-4 rounded-full w-fit text-sm md:text-base text-nowrap;
+    @apply py-2 px-4 rounded-full w-fit text-sm md:text-base text-nowrap;
+    background-color: var(--bg-secondary);
   }
 
   .hero-3d-layout {
@@ -313,7 +357,8 @@ section {
   }
 
   .card-border {
-    @apply border border-black-50 bg-black-100;
+    border: 1px solid var(--surface-card-border);
+    background-color: var(--surface-card);
   }
 
   .marquee-item {
@@ -330,7 +375,9 @@ section {
   }
 
   .timeline-logo {
-    @apply md:size-20 size-10 flex-none rounded-full flex justify-center items-center md:-translate-y-7 border border-black-50 bg-black-100;
+    @apply md:size-20 size-10 flex-none rounded-full flex justify-center items-center md:-translate-y-7;
+    border: 1px solid var(--surface-card-border);
+    background-color: var(--surface-card);
   }
 
   .exp-card-wrapper {
@@ -343,13 +390,15 @@ section {
 
   .tech-card-animated-bg {
     @apply absolute left-0 bottom-[-100%] w-full h-full transition-all duration-700 group-hover:bottom-0;
+    background-color: var(--tech-hover-bg);
   }
 
   .tech-card-content {
     @apply flex flex-col md:justify-center items-center xl:gap-5 xl:h-[30vh] overflow-hidden relative z-10 group-hover:cursor-grab;
 
     & p {
-      @apply text-lg 2xl:text-xl pb-5 xl:pb-0 font-semibold text-white-50 text-center;
+      @apply text-lg 2xl:text-xl pb-5 xl:pb-0 font-semibold text-center;
+      color: var(--text-secondary);
     }
   }
 
@@ -363,12 +412,29 @@ section {
 
   form {
     label {
-      @apply block text-white-50 mb-2;
+      @apply block mb-2;
+      color: var(--text-primary);
     }
 
     input,
     textarea {
-      @apply w-full px-4 py-4 md:text-base text-sm placeholder:text-blue-50 bg-blue-100 rounded-md text-white;
+      @apply w-full px-4 py-4 md:text-base text-sm rounded-md;
+      background-color: var(--field-bg);
+      border: 1px solid var(--field-border);
+      color: var(--field-text);
+      transition: background-color 0.3s ease, border-color 0.3s ease,
+        color 0.3s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--field-placeholder);
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
     }
 
     a {
@@ -381,27 +447,126 @@ section {
   }
 
   .footer {
-    @apply my-10 md:mt-20 mt-10 text-white-50 px-5 md:px-20 xl:px-20 flex items-center justify-center;
+    @apply mt-20 md:mt-32 px-5 md:px-20 xl:px-20 pt-12 md:pt-16 overflow-hidden;
+    background-color: var(--footer-bg);
+    color: var(--text-secondary);
 
     .footer-container {
-      @apply grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-0 w-full;
+      @apply w-full mx-auto;
+      max-width: 1720px;
     }
 
-    p {
-      @apply text-center md:text-start;
+    .footer-top {
+      @apply grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 md:gap-16;
     }
 
     .socials {
-      @apply flex items-center justify-center gap-5;
+      @apply flex items-center gap-4;
 
       .icon {
-        @apply border border-black-50 bg-black-100 flex justify-center items-center rounded-xl size-10 md:size-12 cursor-pointer transition-all duration-500 hover:bg-black-50;
+        @apply flex justify-center items-center rounded-full size-11 md:size-12 cursor-pointer transition-all duration-500;
+        border: 1px solid var(--surface-card-border);
+        background-color: var(--bg-primary);
+      }
+
+      .icon:hover {
+        background-color: var(--surface-card-hover);
+        transform: translateY(-3px);
       }
 
       img {
-        @apply inline-block;
+        @apply inline-block size-5 object-contain;
+        filter: var(--social-icon-filter);
+        opacity: 0.9;
+        transition: filter 0.3s ease, opacity 0.3s ease;
+      }
+
+      .icon:hover img {
+        opacity: 1;
+      }
+
+      .icon-x img {
+        filter: var(--social-icon-x-filter);
       }
     }
+
+    .footer-intro {
+      @apply flex flex-col gap-8;
+    }
+
+    .footer-contact {
+      @apply flex flex-col gap-4 text-lg md:text-xl;
+
+      a,
+      p {
+        @apply w-fit transition-colors duration-300;
+        color: var(--text-primary);
+      }
+
+      a:hover {
+        color: var(--accent-color);
+      }
+    }
+
+    .footer-links {
+      @apply grid grid-cols-2 gap-8 md:gap-12;
+    }
+
+    .footer-link-group {
+      @apply flex flex-col gap-4 md:gap-5;
+
+      p {
+        @apply text-sm uppercase;
+        color: var(--text-secondary);
+      }
+
+      a {
+        @apply w-fit text-lg md:text-xl transition-colors duration-300;
+        color: var(--text-primary);
+      }
+
+      a:hover {
+        color: var(--accent-color);
+      }
+    }
+
+    .footer-divider {
+      @apply mt-12 md:mt-16 h-px w-full;
+      background-color: var(--footer-divider);
+    }
+
+    .footer-bottom {
+      @apply flex flex-col gap-4 py-8 md:flex-row md:items-center md:justify-between;
+
+      p,
+      a {
+        @apply text-base md:text-lg;
+        color: var(--text-secondary);
+      }
+
+      a {
+        @apply w-fit rounded-full px-5 py-2 transition-all duration-300;
+        background-color: var(--contact-btn-bg);
+        color: var(--contact-btn-text);
+      }
+
+      a:hover {
+        background-color: var(--contact-btn-hover-bg);
+        color: var(--contact-btn-hover-text);
+      }
+    }
+
+    .footer-name {
+      @apply select-none font-semibold leading-none text-[58px] sm:text-[90px] md:text-[140px] lg:text-[190px] xl:text-[230px] 2xl:text-[260px];
+      color: var(--footer-name);
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+  }
+
+  .contact-form-card {
+    background-color: var(--surface-card);
+    border: 1px solid var(--surface-card-border);
   }
 }
 
@@ -418,29 +583,25 @@ section {
 }
 
 @keyframes wordSlider {
-  0% {
-    transform: translateY(0.5%);
+  0%,
+  12% {
+    transform: translateY(0);
   }
-  12.5% {
+  20%,
+  32% {
     transform: translateY(-12.5%);
   }
-  25% {
+  40%,
+  52% {
     transform: translateY(-25%);
   }
-  37.5% {
+  60%,
+  72% {
     transform: translateY(-37.5%);
   }
-  50% {
+  80%,
+  100% {
     transform: translateY(-50%);
-  }
-  62.5% {
-    transform: translateY(-62.5%);
-  }
-  75% {
-    transform: translateY(-75%);
-  }
-  87.5% {
-    transform: translateY(-87.5%);
   }
 }
 
