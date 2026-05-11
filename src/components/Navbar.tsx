@@ -3,6 +3,10 @@ import { navLinks } from "../constants";
 
 type Theme = "light" | "dark";
 
+type NavBarProps = {
+  brandName?: string;
+};
+
 const getPreferredTheme = (): Theme => {
   if (typeof window === "undefined") return "light";
 
@@ -57,7 +61,7 @@ const MoonIcon = () => (
   </svg>
 );
 
-const NavBar = () => {
+const NavBar = ({ brandName = "Rifqin11" }: NavBarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<Theme>(getPreferredTheme);
 
@@ -90,7 +94,7 @@ const NavBar = () => {
     <header className={`navbar ${scrolled ? "scrolled" : "not-scrolled"}`}>
       <div className="inner">
         <a href="#hero" className="logo">
-          Rifqin11
+          {brandName}
         </a>
 
         <nav className="desktop">

@@ -10,20 +10,41 @@ import Footer from "./sections/Footer";
 import Contact from "./sections/Contact";
 
 import { Toaster } from "react-hot-toast";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { usePortfolioData } from "./hooks/usePortfolioData";
+import AdminPage from "./pages/AdminPage";
+
+const PublicPortfolio = () => {
+  const { data } = usePortfolioData();
+
+  return (
+    <>
+      <Navbar brandName={data.profile.brandName} />
+      <Hero
+        profile={data.profile}
+        roles={data.heroRoles}
+        stats={data.stats}
+      />
+      <ShowcaseSection projects={data.projects} />
+      <LogoSection />
+      <FeatureCard />
+      <ExperienceSection experiences={data.experiences} />
+      <TechStack skills={data.skills} />
+      <Contact />
+      <Footer profile={data.profile} socialLinks={data.socialLinks} />
+    </>
+  );
+};
 
 const App = () => {
   return (
     <>
       <Toaster />
-      <Navbar />
-      <Hero />
-      <ShowcaseSection />
-      <LogoSection />
-      <FeatureCard />
-      <ExperienceSection />
-      <TechStack />
-      <Contact />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<PublicPortfolio />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </>
   );
 };

@@ -577,6 +577,153 @@ section {
     background-color: var(--surface-card);
     border: 1px solid var(--surface-card-border);
   }
+
+  .admin-shell {
+    @apply min-h-dvh px-5 py-8 md:px-10;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  .admin-header {
+    @apply mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-center md:justify-between;
+
+    h1 {
+      @apply text-3xl font-semibold md:text-5xl;
+    }
+
+    button {
+      @apply w-fit rounded-lg px-5 py-3 font-semibold transition-colors duration-300;
+      background-color: var(--contact-btn-bg);
+      color: var(--contact-btn-text);
+    }
+  }
+
+  .admin-eyebrow {
+    @apply mb-2 text-sm uppercase;
+    color: var(--text-secondary);
+  }
+
+  .admin-tabs {
+    @apply mx-auto mt-8 flex max-w-7xl gap-3 overflow-x-auto pb-2;
+
+    button {
+      @apply shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300;
+      border: 1px solid var(--surface-card-border);
+      color: var(--text-secondary);
+    }
+
+    button.active,
+    button:hover {
+      background-color: var(--contact-btn-bg);
+      color: var(--contact-btn-text);
+    }
+  }
+
+  .admin-grid {
+    @apply mx-auto mt-8 grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-2;
+  }
+
+  .admin-card {
+    @apply rounded-xl p-5 md:p-7;
+    background-color: var(--surface-card);
+    border: 1px solid var(--surface-card-border);
+
+    h1,
+    h2 {
+      @apply mb-5 text-2xl font-semibold;
+      color: var(--text-primary);
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+
+    label {
+      @apply mb-4 flex flex-col gap-2 text-sm font-semibold;
+      color: var(--text-primary);
+    }
+
+    input,
+    textarea {
+      @apply rounded-lg px-4 py-3 text-base font-normal;
+      background-color: var(--field-bg);
+      border: 1px solid var(--field-border);
+      color: var(--field-text);
+    }
+
+    button {
+      @apply rounded-lg px-4 py-3 font-semibold transition-colors duration-300;
+      background-color: var(--contact-btn-bg);
+      color: var(--contact-btn-text);
+    }
+
+    button:hover {
+      background-color: var(--contact-btn-hover-bg);
+      color: var(--contact-btn-hover-text);
+    }
+
+    button:disabled {
+      @apply cursor-not-allowed opacity-60;
+    }
+
+    button.danger {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+  }
+
+  .admin-login {
+    @apply mx-auto mt-24 max-w-md;
+  }
+
+  .admin-alert {
+    @apply mb-5 rounded-lg px-4 py-3 text-sm;
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+
+  .admin-span {
+    @apply lg:col-span-2;
+  }
+
+  .admin-list-header {
+    @apply mb-5 flex items-center justify-between gap-4;
+
+    h2 {
+      @apply mb-0;
+    }
+  }
+
+  .admin-item {
+    @apply mb-5 rounded-xl p-4 last:mb-0;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--surface-card-border);
+  }
+
+  .admin-image-input {
+    @apply grid gap-3;
+
+    input[type="file"] {
+      @apply cursor-pointer text-sm;
+    }
+  }
+
+  .admin-meta {
+    @apply grid grid-cols-1 gap-3 md:grid-cols-3;
+  }
+
+  .admin-check {
+    @apply flex-row items-center justify-start gap-3;
+
+    input {
+      @apply size-4;
+    }
+  }
+
+  .admin-actions {
+    @apply mt-4 flex flex-wrap gap-3;
+  }
 }
 
 .slide {

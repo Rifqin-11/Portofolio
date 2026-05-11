@@ -1,6 +1,16 @@
-import { navLinks, socialImgs } from "../constants";
+import { navLinks } from "../constants";
+import type { ProfileContent, SocialLink } from "../lib/portfolio-types";
 
-const Footer = () => {
+type FooterProps = {
+  profile: ProfileContent;
+  socialLinks: SocialLink[];
+};
+
+const Footer = ({ profile, socialLinks }: FooterProps) => {
+  const websiteUrl = profile.website.startsWith("http")
+    ? profile.website
+    : `https://${profile.website}`;
+
   const socialNames: Record<string, string> = {
     insta: "Instagram",
     x: "X",
@@ -15,7 +25,7 @@ const Footer = () => {
     },
     {
       title: "Connect",
-      links: socialImgs.map((socialImg) => ({
+      links: socialLinks.map((socialImg) => ({
         name: socialNames[socialImg.name] ?? socialImg.name,
         link: socialImg.link,
       })),
@@ -28,7 +38,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-intro">
             <div className="socials">
-              {socialImgs.map((socialImg) => (
+              {socialLinks.map((socialImg) => (
                 <a
                   href={socialImg.link}
                   target="_blank"
@@ -43,16 +53,16 @@ const Footer = () => {
             </div>
 
             <div className="footer-contact">
-              <p>Semarang, Indonesia</p>
-              <a href="mailto:rifqinaufal9009@gmail.com">
-                rifqinaufal9009@gmail.com
+              <p>{profile.location}</p>
+              <a href={`mailto:${profile.email}`}>
+                {profile.email}
               </a>
               <a
-                href="https://rifqinaufal.tech"
+                href={websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                rifqinaufal.tech
+                {profile.website}
               </a>
             </div>
           </div>
@@ -84,13 +94,13 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>
-            © {new Date().getFullYear()} Rifqin11
+            © {new Date().getFullYear()} {profile.brandName}
           </p>
-          <a href="#contact">Let&apos;s work together</a>
+          <a href="#contact">{profile.contactCta}</a>
         </div>
 
         <h2 className="footer-name" aria-label="Rifqi Naufal">
-          RIFQI NAUFAL
+          {profile.footerName}
         </h2>
       </div>
     </footer>

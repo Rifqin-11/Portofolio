@@ -1,10 +1,16 @@
-import { words } from "../constants";
 import Button from "../components/Button";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import AnimatedCounter from "../components/AnimatedCounter";
+import type { HeroRole, ProfileContent, Stat } from "../lib/portfolio-types";
 
-const Hero = () => {
+type HeroProps = {
+  profile: ProfileContent;
+  roles: HeroRole[];
+  stats: Stat[];
+};
+
+const Hero = ({ profile, roles, stats }: HeroProps) => {
   useGSAP(() => {
     gsap.fromTo(
       ".hero-text h1",
@@ -21,6 +27,9 @@ const Hero = () => {
       }
     );
   });
+
+  const rollingRoles = [...roles, ...roles];
+
   return (
     <section id="hero" className="relative overflow-hidden">
       <div className="absolute top-0 left-0 z-10">
@@ -32,14 +41,14 @@ const Hero = () => {
         <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
           <div className="flex flex-col gap-7">
             <div className="hero-text">
-              <h1>HI, I'M RIFQI NAUFAL</h1>
+              <h1>HI, I&apos;M {profile.heroName}</h1>
               <h1>
-                A CREATIVE
+                {profile.heroPrefix}
                 <span className="slide">
                   <span className="wrapper">
-                    {words.map((word, index) => (
+                    {rollingRoles.map((word, index) => (
                       <span
-                        key={index}
+                        key={`${word.id}-${index}`}
                         className="flex items-center md:gap-3 gap-1"
                       >
                         <img
@@ -56,7 +65,7 @@ const Hero = () => {
             </div>
 
             <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl z-10 pointer-events-none">
-              Final year Electrical Engineering student with a passion for code.
+              {profile.heroSubtitle}
             </p>
 
             <Button
@@ -71,14 +80,14 @@ const Hero = () => {
         <figure className="">
           <div className="xl:w-[35%] md:w-[50%] w-[90%] min-h-[50vh] absolute xl:top-1/2 md:top-150 top-130 -translate-y-1/2 left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-25">
             <img
-              src="/images/profile.png"
+              src={profile.profileImage}
               alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
         </figure>
       </div>
-      <AnimatedCounter />
+      <AnimatedCounter items={stats} />
     </section>
   );
 };

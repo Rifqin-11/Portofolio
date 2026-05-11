@@ -2,13 +2,17 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { expCards } from "../constants";
 import TitleHeader from "../components/TitleHeader";
 import GlowCard from "../components/GlowCard";
+import type { Experience } from "../lib/portfolio-types";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ExperienceSection = () => {
+type ExperienceSectionProps = {
+  experiences: Experience[];
+};
+
+const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
   useGSAP(() => {
     gsap.utils.toArray(".timeline-card").forEach((card) => {
       gsap.from(card as Element, {
@@ -66,8 +70,8 @@ const ExperienceSection = () => {
 
         <div className="mt-32 relative">
           <div className="relative z-50 xl:space-y-32 space-y-10">
-            {expCards.map((card, idx) => (
-              <div key={card.title} className="exp-card-wrapper">
+            {experiences.map((card, idx) => (
+              <div key={card.id} className="exp-card-wrapper">
                 <div className="xl:w-2/6">
                   <GlowCard card={card} index={idx}>
                     {card.imgPath ? (

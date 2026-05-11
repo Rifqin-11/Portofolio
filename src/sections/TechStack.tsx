@@ -2,10 +2,13 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 import TitleHeader from "../components/TitleHeader";
-import { techStackImgs } from "../constants";
-// import { techStackImgs } from "../constants";
+import type { Skill } from "../lib/portfolio-types";
 
-const TechStack = () => {
+type TechStackProps = {
+  skills: Skill[];
+};
+
+const TechStack = ({ skills }: TechStackProps) => {
   // Animate the tech cards in the skills section
   useGSAP(() => {
     // This animation is triggered when the user scrolls to the #skills wrapper
@@ -39,9 +42,9 @@ const TechStack = () => {
       <div className="w-full md:px-10 px-5">
         <TitleHeader title="My Skills" sub="🤝 What I Bring to the Table" />
         <div className="tech-grid">
-          {techStackImgs.map((techStackIcon, index) => (
+          {skills.map((techStackIcon) => (
             <div
-              key={index}
+              key={techStackIcon.id}
               className="card-border tech-card overflow-hidden group xl:rounded-2xl rounded-xl bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]"
             >
               <div className="tech-card-animated-bg" />
