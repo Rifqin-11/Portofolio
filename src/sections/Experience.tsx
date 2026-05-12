@@ -15,33 +15,50 @@ type ExperienceSectionProps = {
 const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
   useGSAP(() => {
     gsap.utils.toArray(".timeline-card").forEach((card) => {
-      gsap.from(card as Element, {
-        xPercent: -100,
-        opacity: 0,
-        transformOrigin: "left left",
-        duration: 1,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: card as Element,
-          start: "top 80%",
+      const cardElement = card as HTMLElement;
+
+      if (cardElement.getBoundingClientRect().top < window.innerHeight * 0.85) {
+        gsap.set(cardElement, { xPercent: 0, opacity: 1 });
+        return;
+      }
+
+      gsap.fromTo(
+        cardElement,
+        {
+          xPercent: -120,
+          opacity: 0,
         },
-      });
+        {
+          xPercent: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: cardElement,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
     });
 
-    gsap.to(".timeline", {
-      transformOrigin: "bottom bottom",
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: ".timeline",
-        start: "top center",
-        end: "70% center",
-        onUpdate: (self) => {
-          gsap.to(".timeline", {
-            scaleY: 1 - self.progress,
-          });
-        },
+    gsap.fromTo(
+      ".experience-list .gradient-line",
+      {
+        scaleY: 0,
+        transformOrigin: "top top",
       },
-    });
+      {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".experience-list",
+          start: "top 70%",
+          end: "bottom 70%",
+          scrub: true,
+        },
+      }
+    );
 
     gsap.utils.toArray(".expText").forEach((text) => {
       gsap.from(text as Element, {
@@ -55,7 +72,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
         },
       });
     }, "<");
-  }, []);
+  }, { dependencies: [experiences.length], revertOnUpdate: true });
 
   return (
     <section
@@ -69,7 +86,10 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
         />
 
         <div className="mt-32 relative">
-          <div className="relative z-50 xl:space-y-32 space-y-10">
+          <div className="experience-list relative z-50 xl:space-y-32 space-y-10">
+            <div className="timeline-wrapper" aria-hidden="true">
+              <div className="gradient-line w-1 h-full" />
+            </div>
             {experiences.map((card, idx) => (
               <div key={card.id} className="exp-card-wrapper">
                 <div className="xl:w-2/6">
@@ -86,11 +106,6 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
 
                 <div className="xl:w-4/6">
                   <div className="flex items-start">
-                    <div className="timeline-wrapper">
-                      <div className="timeline" />
-                      <div className="gradient-line w-1 h-full" />
-                    </div>
-
                     <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
                       {card.logoPath ? (
                         <div className="timeline-logo bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary)]">

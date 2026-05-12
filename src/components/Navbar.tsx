@@ -61,6 +61,24 @@ const MoonIcon = () => (
   </svg>
 );
 
+const ContactIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M22 2 11 13" />
+    <path d="m22 2-7 20-4-9-9-4Z" />
+  </svg>
+);
+
 const NavBar = ({ brandName = "Rifqin11" }: NavBarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<Theme>(getPreferredTheme);
@@ -121,7 +139,7 @@ const NavBar = ({ brandName = "Rifqin11" }: NavBarProps) => {
 
           <a href="#contact" className="contact-btn group">
             <div className="inner">
-              <img src="/images/contact.svg" alt="" aria-hidden="true" />
+              <ContactIcon />
               <span>Contact me</span>
             </div>
           </a>

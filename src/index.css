@@ -265,13 +265,9 @@ section {
         color: var(--contact-btn-text);
       }
 
-      img {
+      svg {
         @apply size-5 object-contain md:hidden;
-        filter: invert(0);
-      }
-
-      .inner:hover img {
-        filter: brightness(0);
+        color: currentColor;
       }
 
       &:hover .inner {
@@ -374,13 +370,12 @@ section {
     @apply md:w-40 w-32;
   }
 
-  .timeline-wrapper {
-    @apply absolute top-0 xl:left-[35.5vw] md:left-10 left-5 h-full flex justify-center;
+  .experience-list {
+    @apply relative;
   }
 
-  .timeline {
-    @apply absolute z-30 h-[110%] -top-10 w-14 md:w-28;
-    background-color: var(--timeline-bg);
+  .timeline-wrapper {
+    @apply pointer-events-none absolute bottom-0 top-0 xl:left-[35.5vw] md:left-10 left-5 z-10 flex justify-center;
   }
 
   .timeline-logo {
@@ -390,7 +385,11 @@ section {
   }
 
   .exp-card-wrapper {
-    @apply flex flex-col-reverse xl:flex-row xl:gap-20 gap-10 justify-between;
+    @apply relative z-20 flex flex-col-reverse xl:flex-row xl:gap-20 gap-10 justify-between;
+
+    .timeline-card {
+      @apply relative z-30;
+    }
   }
 
   .gradient-edge {
@@ -763,6 +762,7 @@ section {
 
 .gradient-line {
   width: 2px;
+  transform-origin: top;
   background: linear-gradient(
     0deg,
     rgba(69, 222, 196, 0) 0%,
