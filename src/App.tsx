@@ -6,6 +6,7 @@ import FeatureCard from "./sections/FeatureCard";
 import ExperienceSection from "./sections/Experience";
 import TechStack from "./sections/TechStack";
 import Footer from "./sections/Footer";
+import InteractiveBackground from "./components/InteractiveBackground";
 
 import Contact from "./sections/Contact";
 
@@ -40,11 +41,14 @@ const App = () => {
   return (
     <>
       <Toaster />
-      <Routes>
-        <Route path="/" element={<PublicPortfolio />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <InteractiveBackground />
+      <div className="app-content">
+        <Routes>
+          <Route path="/" element={<PublicPortfolio />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
     </>
   );
 };

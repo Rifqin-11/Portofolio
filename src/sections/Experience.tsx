@@ -77,7 +77,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
   return (
     <section
       id="experience"
-      className="w-full md:mt-40 mt-20 section-padding xl:px-0 bg-[var(--bg-primary)] dark:bg-[var(--bg-primary)]"
+      className="w-full md:mt-40 mt-20 section-padding xl:px-0"
     >
       <div className="w-full h-full md:px-20 px-5">
         <TitleHeader
@@ -118,7 +118,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                       ) : (
                         <div className="md:size-20 size-10 flex-none rounded-full flex justify-center items-center md:-translate-y-7"></div>
                       )}
-                      <div>
+                      <div className="experience-copy">
                         <h1 className="font-semibold text-3xl text-[var(--text-primary)] dark:text-[var(--text-primary)]">
                           {card.title}
                         </h1>
