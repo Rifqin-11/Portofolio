@@ -41,6 +41,10 @@
   --social-icon-x-filter: brightness(0);
   --dot-color: rgba(28, 28, 33, 0.16);
   --dot-light-color: rgba(28, 28, 33, 0.55);
+  --card-glow-gradient: radial-gradient(circle, #1c1c21 0%, #6b7280 100%);
+  --card-glow-start: rgba(28, 28, 33, 0.08);
+  --card-glow-mid: rgba(28, 28, 33, 0.9);
+  --card-glow-end: rgba(28, 28, 33, 0);
 }
 
 .dark {
@@ -81,6 +85,10 @@
   --social-icon-x-filter: invert(1);
   --dot-color: rgba(255, 255, 255, 0.18);
   --dot-light-color: rgba(255, 255, 255, 0.95);
+  --card-glow-gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
+  --card-glow-start: #ffffff1f;
+  --card-glow-mid: white;
+  --card-glow-end: #ffffff00;
 }
 
 html,
@@ -898,22 +906,23 @@ section,
          dark:bg-[var(--bg-secondary)]
          ring-1 ring-transparent        /* ring default transparent */
          transition-all duration-300;
-  --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
+  --gradient: var(--card-glow-gradient);
   --start: 0;
 }
 
 .card::before {
   content: "";
   @apply absolute inset-0 rounded-xl transition-opacity duration-500;
+  pointer-events: none;
   border: 2px solid transparent;
   background: var(--gradient);
   background-attachment: fixed;
   mask: linear-gradient(#0000, #0000),
     conic-gradient(
       from calc((var(--start, 0) - 15) * 1deg),
-      #ffffff1f 0deg,
-      white,
-      #ffffff00 100deg
+      var(--card-glow-start) 0deg,
+      var(--card-glow-mid),
+      var(--card-glow-end) 100deg
     );
   mask-composite: intersect;
   mask-clip: padding-box, border-box;
