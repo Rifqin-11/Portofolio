@@ -31,11 +31,15 @@ create table if not exists public.projects (
   image text not null,
   link text not null,
   background_color text not null default '#e8f4f6',
+  image_layout text not null default 'contained',
   featured boolean not null default false,
   sort_order int not null default 0,
   is_active boolean not null default true,
   updated_at timestamptz not null default now()
 );
+
+alter table public.projects
+  add column if not exists image_layout text not null default 'contained';
 
 create table if not exists public.experiences (
   id text primary key default gen_random_uuid()::text,
@@ -219,15 +223,16 @@ insert into public.projects (
   image,
   link,
   background_color,
+  image_layout,
   featured,
   sort_order,
   is_active
 ) values
-  ('split-bill', 'Split Bill Web App', 'Split Bill is a web app that lets users upload a photo of a receipt and automatically splits the bill based on who ordered what. Assign items to each person, get an instant breakdown of costs, and share the payment info with friends. Simple, smart, and perfect for dining out together.', '/images/project6.png', 'https://splitbill.rifqinaufal11.studio/', '#e8f4f6', true, 1, true),
-  ('siap-undip-schedule', 'Siap Undip Schedule', '', '/images/project3.png', 'https://schedule.rifqinaufal11.studio/', '#e8f4f6', false, 2, true),
-  ('employee-web', 'EmployeeWeb - Visitor Management System', '', '/images/project1.png', 'https://github.com/Rifqin-11/EmployeeWeb', '#e4eefe', false, 3, true),
-  ('pln-calculator', 'PLN Calculator', '', '/images/project2.png', 'https://github.com/Rifqin-11/PLNCalculator', '#F1EBFF', false, 4, true),
-  ('sitita', 'Sitita Teknik Elektro', '', '/images/project4.png', 'https://github.com/Rifqin-11/Sitita', '#E6FFF7', false, 5, true)
+  ('split-bill', 'Split Bill Web App', 'Split Bill is a web app that lets users upload a photo of a receipt and automatically splits the bill based on who ordered what. Assign items to each person, get an instant breakdown of costs, and share the payment info with friends. Simple, smart, and perfect for dining out together.', '/images/project6.png', 'https://splitbill.rifqinaufal11.studio/', '#e8f4f6', 'contained', true, 1, true),
+  ('siap-undip-schedule', 'Siap Undip Schedule', '', '/images/project3.png', 'https://schedule.rifqinaufal11.studio/', '#e8f4f6', 'full', false, 2, true),
+  ('employee-web', 'EmployeeWeb - Visitor Management System', '', '/images/project1.png', 'https://github.com/Rifqin-11/EmployeeWeb', '#e4eefe', 'contained', false, 3, true),
+  ('pln-calculator', 'PLN Calculator', '', '/images/project2.png', 'https://github.com/Rifqin-11/PLNCalculator', '#F1EBFF', 'contained', false, 4, true),
+  ('sitita', 'Sitita Teknik Elektro', '', '/images/project4.png', 'https://github.com/Rifqin-11/Sitita', '#E6FFF7', 'contained', false, 5, true)
 on conflict (id) do nothing;
 
 insert into public.experiences (

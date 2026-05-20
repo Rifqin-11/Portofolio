@@ -12,6 +12,12 @@ type ShowcaseSectionProps = {
 
 const ShowcaseSection = ({ projects }: ShowcaseSectionProps) => {
   const sectionRef = useRef(null);
+  const imageFrameClass = (project: Project) =>
+    project.imageLayout === "full" ? "is-full" : "is-contained";
+  const imageFrameStyle = (project: Project) =>
+    project.imageLayout === "contained"
+      ? { backgroundColor: project.backgroundColor }
+      : undefined;
 
   useGSAP(() => {
     gsap.fromTo(
@@ -55,7 +61,10 @@ const ShowcaseSection = ({ projects }: ShowcaseSectionProps) => {
         <div className="showcaselayout">
           {featuredProject && (
             <div className="first-project-wrapper project">
-              <div className="image-wrapper">
+              <div
+                className={`image-wrapper ${imageFrameClass(featuredProject)}`}
+                style={imageFrameStyle(featuredProject)}
+              >
                 <img src={featuredProject.image} alt={featuredProject.title} />
               </div>
               <div className="text-content">
@@ -80,8 +89,8 @@ const ShowcaseSection = ({ projects }: ShowcaseSectionProps) => {
             {sideProjects.map((project) => (
               <div className="project" key={project.id}>
                 <div
-                  className="image-wrapper"
-                  style={{ backgroundColor: project.backgroundColor }}
+                  className={`image-wrapper ${imageFrameClass(project)}`}
+                  style={imageFrameStyle(project)}
                 >
                   <img src={project.image} alt={project.title} />
                 </div>
@@ -101,13 +110,17 @@ const ShowcaseSection = ({ projects }: ShowcaseSectionProps) => {
           {gridProjects.map((project) => (
             <div className="project flex flex-col items-start" key={project.id}>
               <div
-                className="image-wrapper rounded-2xl w-full h-[400px] flex items-center justify-center overflow-hidden"
-                style={{ backgroundColor: project.backgroundColor }}
+                className={`image-wrapper ${imageFrameClass(project)} rounded-2xl w-full h-[400px] flex items-center justify-center overflow-hidden`}
+                style={imageFrameStyle(project)}
               >
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="max-h-full max-w-full object-contain"
+                  className={
+                    project.imageLayout === "full"
+                      ? "h-full w-full object-cover"
+                      : "max-h-full max-w-full object-contain"
+                  }
                 />
               </div>
               <a

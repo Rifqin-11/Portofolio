@@ -42,6 +42,7 @@ type ProjectRow = CommonRow & {
   image: string;
   link: string;
   background_color: string | null;
+  image_layout: Project["imageLayout"] | null;
   featured: boolean | null;
 };
 
@@ -102,6 +103,7 @@ const mapProject = (row: ProjectRow): Project => ({
   image: row.image,
   link: row.link,
   backgroundColor: row.background_color ?? "#e8f4f6",
+  imageLayout: row.image_layout === "full" ? "full" : "contained",
   featured: row.featured ?? false,
   sortOrder: row.sort_order ?? 0,
   isActive: row.is_active ?? true,

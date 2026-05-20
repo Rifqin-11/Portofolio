@@ -381,6 +381,14 @@ section,
         }
       }
 
+      .image-wrapper.is-contained {
+        @apply flex items-center justify-center overflow-hidden rounded-xl p-4 md:p-6;
+
+        img {
+          @apply static max-h-full max-w-full object-contain;
+        }
+      }
+
       .text-content {
         @apply space-y-5 mt-5;
 
@@ -401,13 +409,25 @@ section,
         @apply xl:h-[37vh] md:h-52 lg:h-72 h-64 relative rounded-xl xl:px-5 2xl:px-12 py-0;
       }
 
+      .image-wrapper.is-full {
+        @apply p-0 overflow-hidden;
+      }
+
       img {
         @apply w-full h-full object-contain rounded-xl;
+      }
+
+      .image-wrapper.is-full img {
+        @apply object-cover;
       }
 
       a {
         @apply text-lg md:text-xl lg:text-2xl font-semibold mt-5;
       }
+    }
+
+    .image-wrapper.is-full {
+      background-color: transparent;
     }
   }
 
@@ -976,6 +996,53 @@ section,
     input[type="file"] {
       @apply cursor-pointer text-sm;
     }
+  }
+
+  .admin-color-input span {
+    @apply grid grid-cols-[56px_1fr] gap-3;
+  }
+
+  .admin-color-input input[type="color"] {
+    @apply h-12 w-14 cursor-pointer rounded-lg p-1;
+  }
+
+  .admin-field-group {
+    @apply grid gap-2 text-sm font-semibold;
+    color: var(--text-primary);
+  }
+
+  .admin-layout-options {
+    @apply grid grid-cols-1 gap-2 md:grid-cols-2;
+  }
+
+  .admin-layout-options label {
+    @apply mb-0 flex cursor-pointer flex-row items-start gap-3 rounded-lg px-3 py-3;
+    background-color: var(--field-bg);
+    border: 1px solid var(--field-border);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .admin-layout-options label:hover,
+  .admin-layout-options label.active {
+    background-color: color-mix(in srgb, var(--accent-color) 10%, var(--field-bg));
+    border-color: color-mix(in srgb, var(--accent-color) 45%, var(--field-border));
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--text-primary) 8%, transparent);
+  }
+
+  .admin-layout-options input {
+    @apply mt-1 size-4 shrink-0;
+  }
+
+  .admin-layout-options span {
+    @apply flex flex-col gap-1;
+  }
+
+  .admin-layout-options small {
+    @apply text-xs font-medium;
+    color: var(--text-secondary);
   }
 
   .admin-check {

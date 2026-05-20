@@ -387,6 +387,7 @@ const AdminPage = () => {
         image: project.image,
         link: project.link,
         background_color: project.backgroundColor,
+        image_layout: project.imageLayout,
         featured: project.featured,
         sort_order: project.sortOrder,
         is_active: project.isActive,
@@ -905,6 +906,7 @@ const AdminPage = () => {
                         image: "/images/project1.png",
                         link: "#",
                         backgroundColor: "#e8f4f6",
+                        imageLayout: "full",
                         featured: shouldFeature,
                         sortOrder: current.projects.length + 1,
                         isActive: true,
@@ -927,6 +929,8 @@ const AdminPage = () => {
               const badges: { tone: Tone; label: string }[] = [];
               if (project.featured)
                 badges.push({ tone: "featured", label: "Featured" });
+              if (project.imageLayout === "full")
+                badges.push({ tone: "active", label: "Full image" });
               if (pendingNew.projects.has(project.id))
                 badges.push({ tone: "draft", label: "Draft" });
               return (
@@ -1010,17 +1014,30 @@ const AdminPage = () => {
                       )
                     }
                   />
-                  <TextInput
-                    label="Background Color"
-                    value={project.backgroundColor}
+                  <ProjectImageLayoutPicker
+                    projectId={project.id}
+                    value={project.imageLayout}
                     onChange={(value) =>
                       setData((current) =>
                         updateProject(current, index, {
-                          backgroundColor: value,
+                          imageLayout: value,
                         }),
                       )
                     }
                   />
+                  {project.imageLayout === "contained" && (
+                    <ColorInput
+                      label="Background Color"
+                      value={project.backgroundColor}
+                      onChange={(value) =>
+                        setData((current) =>
+                          updateProject(current, index, {
+                            backgroundColor: value,
+                          }),
+                        )
+                      }
+                    />
+                  )}
                   <label className="admin-check admin-featured-radio">
                     <input
                       type="radio"
@@ -1594,6 +1611,35 @@ const TextInput = ({ label, value, onChange }: TextInputProps) => (
   </label>
 );
 
+const toColorInputValue = (value: string) => {
+  const trimmed = value.trim();
+  if (/^#[0-9a-fA-F]{6}$/.test(trimmed)) return trimmed;
+  if (/^#[0-9a-fA-F]{3}$/.test(trimmed)) {
+    const [, r, g, b] = trimmed;
+    return `#${r}${r}${g}${g}${b}${b}`;
+  }
+  return "#e8f4f6";
+};
+
+const ColorInput = ({ label, value, onChange }: TextInputProps) => (
+  <label className="admin-color-input">
+    {label}
+    <span>
+      <input
+        type="color"
+        value={toColorInputValue(value)}
+        onChange={(event) => onChange(event.target.value)}
+        aria-label={`${label} picker`}
+      />
+      <input
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        aria-label={`${label} hex value`}
+      />
+    </span>
+  </label>
+);
+
 const NumberInput = ({
   label,
   value,
@@ -1647,6 +1693,46 @@ const ImageInput = ({
         onUpload(event.target.files?.[0] ?? null, folder, onChange)
       }
     />
+  </div>
+);
+
+const ProjectImageLayoutPicker = ({
+  projectId,
+  value,
+  onChange,
+}: {
+  projectId: string;
+  value: Project["imageLayout"];
+  onChange: (value: Project["imageLayout"]) => void;
+}) => (
+  <div className="admin-field-group">
+    <span>Image Display</span>
+    <div className="admin-layout-options" role="radiogroup">
+      <label className={value === "full" ? "active" : ""}>
+        <input
+          type="radio"
+          name={`project-image-layout-${projectId}`}
+          checked={value === "full"}
+          onChange={() => onChange("full")}
+        />
+        <span>
+          <strong>Full image</strong>
+          <small>Foto memenuhi card tanpa background warna.</small>
+        </span>
+      </label>
+      <label className={value === "contained" ? "active" : ""}>
+        <input
+          type="radio"
+          name={`project-image-layout-${projectId}`}
+          checked={value === "contained"}
+          onChange={() => onChange("contained")}
+        />
+        <span>
+          <strong>With background</strong>
+          <small>Mode lama, foto contain dengan pilihan warna.</small>
+        </span>
+      </label>
+    </div>
   </div>
 );
 

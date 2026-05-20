@@ -27,6 +27,7 @@ export type Project = {
   image: string;
   link: string;
   backgroundColor: string;
+  imageLayout: "contained" | "full";
   featured: boolean;
   sortOrder: number;
   isActive: boolean;
