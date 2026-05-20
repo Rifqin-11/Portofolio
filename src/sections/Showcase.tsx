@@ -110,7 +110,7 @@ const ShowcaseSection = ({ projects }: ShowcaseSectionProps) => {
           {gridProjects.map((project) => (
             <div className="project flex flex-col items-start" key={project.id}>
               <div
-                className={`image-wrapper ${imageFrameClass(project)} rounded-2xl w-full h-[400px] flex items-center justify-center overflow-hidden`}
+                className={`image-wrapper ${imageFrameClass(project)} rounded-2xl w-full flex items-center justify-center overflow-hidden`}
                 style={imageFrameStyle(project)}
               >
                 <img

@@ -365,16 +365,21 @@ section,
 
   .app-showcase {
     @apply w-full mt-20 px-5 md:px-20 py-10 md:py-20 flex items-center justify-center;
+    --project-image-ratio: 16 / 9;
 
     .showcaselayout {
       @apply flex xl:flex-row flex-col gap-10 justify-between;
+    }
+
+    .image-wrapper {
+      aspect-ratio: var(--project-image-ratio);
     }
 
     .first-project-wrapper {
       @apply h-full flex flex-col justify-between xl:w-[60%];
 
       .image-wrapper {
-        @apply xl:h-[70vh] md:h-[50vh] h-96 relative;
+        @apply relative w-full overflow-hidden rounded-xl;
 
         img {
           @apply w-full h-full object-cover rounded-xl absolute inset-0;
@@ -405,8 +410,12 @@ section,
     .project-list-wrapper {
       @apply flex md:flex-row flex-col xl:flex-col gap-10 xl:w-[40%];
 
+      .project {
+        @apply w-full;
+      }
+
       .image-wrapper {
-        @apply xl:h-[37vh] md:h-52 lg:h-72 h-64 relative rounded-xl xl:px-5 2xl:px-12 py-0;
+        @apply relative w-full rounded-xl xl:px-5 2xl:px-12 py-0;
       }
 
       .image-wrapper.is-full {
