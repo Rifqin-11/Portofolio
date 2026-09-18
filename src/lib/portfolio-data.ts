@@ -181,36 +181,35 @@ export const fetchPortfolioData = async (
       supabase.from("social_links").select("*").order("sort_order", bySortOrder),
     ]);
 
-    if (
-      profileResult.error ||
-      rolesResult.error ||
-      projectsResult.error ||
-      experiencesResult.error ||
-      skillsResult.error ||
-      statsResult.error ||
-      socialsResult.error
-    ) {
-      return fallbackPortfolioData;
-    }
-
-    const roleRows = visibleRows(rolesResult.data as HeroRoleRow[], includeInactive);
+    const roleRows = visibleRows(
+      rolesResult.error ? null : (rolesResult.data as HeroRoleRow[]),
+      includeInactive
+    );
     const projectRows = visibleRows(
-      projectsResult.data as ProjectRow[],
+      projectsResult.error ? null : (projectsResult.data as ProjectRow[]),
       includeInactive
     );
     const experienceRows = visibleRows(
-      experiencesResult.data as ExperienceRow[],
+      experiencesResult.error
+        ? null
+        : (experiencesResult.data as ExperienceRow[]),
       includeInactive
     );
-    const skillRows = visibleRows(skillsResult.data as SkillRow[], includeInactive);
-    const statRows = visibleRows(statsResult.data as StatRow[], includeInactive);
+    const skillRows = visibleRows(
+      skillsResult.error ? null : (skillsResult.data as SkillRow[]),
+      includeInactive
+    );
+    const statRows = visibleRows(
+      statsResult.error ? null : (statsResult.data as StatRow[]),
+      includeInactive
+    );
     const socialRows = visibleRows(
-      socialsResult.data as SocialRow[],
+      socialsResult.error ? null : (socialsResult.data as SocialRow[]),
       includeInactive
     );
 
     return {
-      profile: profileResult.data
+      profile: !profileResult.error && profileResult.data
         ? mapProfile(profileResult.data as ProfileRow)
         : fallbackPortfolioData.profile,
       heroRoles:

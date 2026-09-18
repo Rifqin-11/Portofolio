@@ -3,6 +3,15 @@
 declare module "*.glb";
 declare module "*.png";
 
+interface ImportMetaEnv {
+  readonly VITE_GEMINI_API_KEY?: string;
+  readonly VITE_GEMINI_MODEL?: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 declare module "meshline" {
   export const MeshLineGeometry: any;
   export const MeshLineMaterial: any;

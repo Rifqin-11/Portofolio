@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { fallbackPortfolioData } from "../lib/fallback-portfolio";
+import { rewritePortfolioText, rewriteResponsibilities } from "../lib/gemini";
 import { fetchPortfolioData } from "../lib/portfolio-data";
 import type {
   Experience,
@@ -1048,7 +1049,7 @@ const AdminPage = () => {
                     Featured (tampil di hero showcase)
                   </label>
                   {project.featured && (
-                    <TextareaInput
+                    <AiTextareaInput
                       label="Description (hanya untuk featured)"
                       value={project.description}
                       onChange={(value) =>
@@ -1056,6 +1057,7 @@ const AdminPage = () => {
                           updateProject(current, index, { description: value }),
                         )
                       }
+                      rewrite={rewritePortfolioText}
                     />
                   )}
                 </ItemCard>
@@ -1098,6 +1100,10 @@ const AdminPage = () => {
               pendingDeletes={pendingDeletes.experiences.size}
               pendingNew={pendingNew.experiences.size}
             />
+            <p className="admin-section-help">
+              Yang tampil di portfolio: tanggal, role, company, deskripsi, dan
+              maksimal tiga tanggung jawab. Gunakan format judul <strong>Role | Company</strong>.
+            </p>
             {data.experiences.length === 0 && (
               <p className="admin-empty">Belum ada experience.</p>
             )}
@@ -1155,7 +1161,7 @@ const AdminPage = () => {
                   saving={saving}
                 >
                   <TextInput
-                    label="Title"
+                    label="Title (Role | Company)"
                     value={experience.title}
                     onChange={(value) =>
                       setData((current) =>
@@ -1172,7 +1178,7 @@ const AdminPage = () => {
                       )
                     }
                   />
-                  <TextareaInput
+                  <AiTextareaInput
                     label="Review"
                     value={experience.review}
                     onChange={(value) =>
@@ -1180,8 +1186,9 @@ const AdminPage = () => {
                         updateExperience(current, index, { review: value }),
                       )
                     }
+                    rewrite={rewritePortfolioText}
                   />
-                  <TextareaInput
+                  <AiTextareaInput
                     label="Responsibilities (one per line)"
                     value={experience.responsibilities.join("\n")}
                     onChange={(value) =>
@@ -1194,29 +1201,9 @@ const AdminPage = () => {
                         }),
                       )
                     }
+                    rewrite={rewriteResponsibilities}
                   />
-                  <ImageInput
-                    label="Card Image"
-                    value={experience.imgPath}
-                    folder="experience"
-                    onUpload={handleUpload}
-                    onChange={(value) =>
-                      setData((current) =>
-                        updateExperience(current, index, { imgPath: value }),
-                      )
-                    }
-                  />
-                  <ImageInput
-                    label="Logo"
-                    value={experience.logoPath}
-                    folder="experience"
-                    onUpload={handleUpload}
-                    onChange={(value) =>
-                      setData((current) =>
-                        updateExperience(current, index, { logoPath: value }),
-                      )
-                    }
-                  />
+                  <ExperiencePreview experience={experience} />
                 </ItemCard>
               );
             })}
@@ -1670,6 +1657,73 @@ const TextareaInput = ({ label, value, onChange }: TextInputProps) => (
   </label>
 );
 
+type AiTextareaInputProps = TextInputProps & {
+  rewrite: (draft: string, instruction?: string) => Promise<string>;
+};
+
+const AiTextareaInput = ({
+  label,
+  value,
+  onChange,
+  rewrite,
+}: AiTextareaInputProps) => {
+  const [instruction, setInstruction] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleRewrite = async () => {
+    if (!value.trim()) {
+      toast.error("Tulis draft terlebih dahulu sebelum memakai AI.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await rewrite(value, instruction);
+      onChange(result);
+      toast.success("Teks berhasil diperbaiki.");
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Gemini gagal memproses teks.";
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="admin-ai-field">
+      <label>
+        {label}
+        <textarea
+          value={value}
+          rows={4}
+          onChange={(event) => onChange(event.target.value)}
+        />
+      </label>
+      <div className="admin-ai-controls">
+        <input
+          value={instruction}
+          onChange={(event) => setInstruction(event.target.value)}
+          placeholder="Instruksi tambahan, contoh: buat lebih singkat"
+          aria-label={`${label} AI instruction`}
+        />
+        <button
+          type="button"
+          className="admin-ai-button"
+          onClick={handleRewrite}
+          disabled={loading || !value.trim()}
+        >
+          {loading ? "Improving..." : "Improve with Gemini"}
+        </button>
+      </div>
+      <p className="admin-ai-hint">
+        Tulis dengan gaya bebas, lalu Gemini akan merapikan bahasa tanpa mengubah
+        fakta.
+      </p>
+    </div>
+  );
+};
+
 const ImageInput = ({
   label,
   value,
@@ -1745,6 +1799,38 @@ const Badge = ({
   tone: Tone;
   children: React.ReactNode;
 }) => <span className={`admin-badge admin-badge-${tone}`}>{children}</span>;
+
+const ExperiencePreview = ({ experience }: { experience: Experience }) => {
+  const [role, ...companyParts] = experience.title.split("|");
+  const company = companyParts.join("|").trim();
+  const responsibilities = experience.responsibilities.slice(0, 3);
+
+  return (
+    <aside className="admin-experience-preview" aria-label="Public preview">
+      <div className="admin-experience-preview__label">
+        <span>Public preview</span>
+        <span>Experience section</span>
+      </div>
+      <div className="admin-experience-preview__content">
+        <time>{experience.date || "Date"}</time>
+        <div>
+          <div className="admin-experience-preview__heading">
+            <strong>{role.trim() || "Role title"}</strong>
+            {company && <span>{company}</span>}
+          </div>
+          <p>{experience.review || "The public description will appear here."}</p>
+          {responsibilities.length > 0 && (
+            <ul>
+              {responsibilities.map((responsibility) => (
+                <li key={responsibility}>{responsibility}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </aside>
+  );
+};
 
 type SectionActionBarProps = {
   title: string;

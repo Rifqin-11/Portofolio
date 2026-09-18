@@ -99,10 +99,11 @@ const NavBar = ({ brandName = "Rifqin11" }: NavBarProps) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
+      const isScrolled = window.scrollY > window.innerHeight * 0.8;
       setScrolled(isScrolled);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);

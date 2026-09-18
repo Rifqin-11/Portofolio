@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
-import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/ContactExperience";
 
 import toast from "react-hot-toast";
@@ -50,20 +49,21 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="flex-center section-padding">
-      <div className="w-full h-full md:px-10 px-5">
-        <TitleHeader
-          title="Get in Touch – Let’s Connect"
-          sub="💬 Have questions or ideas? Let’s talk! 🚀"
-        />
-        <div className="grid-12-cols mt-16">
-          <div className="xl:col-span-7">
-            <div className="contact-form-card flex-center rounded-xl p-10">
-              <form
-                ref={formRef}
-                onSubmit={handleSubmit}
-                className="w-full flex flex-col gap-7"
-              >
+    <section id="contact" className="editorial-section contact-section">
+      <div className="contact-section__inner">
+        <div className="editorial-section__header contact-section__header">
+          <p className="editorial-kicker">Contact</p>
+          <h2>Have a project in mind?</h2>
+          <p>Tell me what you are building and I will get back to you.</p>
+        </div>
+        <div className="contact-layout">
+          <div className="contact-form-card">
+            <div className="contact-form-card__intro">
+              <span>Start a conversation</span>
+              <p>I usually reply within a couple of days.</p>
+            </div>
+            <form ref={formRef} onSubmit={handleSubmit}>
+              <div className="contact-form-grid">
                 <div>
                   <label htmlFor="name">Your name</label>
                   <input
@@ -89,38 +89,50 @@ const Contact = () => {
                     required
                   />
                 </div>
+              </div>
 
-                <div>
-                  <label htmlFor="message">Your Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
-                    placeholder="How can I help you?"
-                    rows={5}
-                    required
-                  />
-                </div>
+              <div>
+                <label htmlFor="message">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="How can I help you?"
+                  rows={5}
+                  required
+                />
+              </div>
 
-                <button type="submit">
-                  <div className="cta-button group">
-                    <div className="bg-circle" />
-                    <p className="text">
-                      {loading ? "Sending..." : "Send Message"}
-                    </p>
-                    <div className="arrow-wrapper">
-                      <img src="/images/arrow-down.svg" alt="arrow" />
-                    </div>
-                  </div>
-                </button>
-              </form>
-            </div>
+              <button
+                type="submit"
+                className="contact-submit"
+                disabled={loading}
+                aria-busy={loading}
+              >
+                <span className="cta-button group">
+                  <span className="bg-circle" />
+                  <span className="text">
+                    {loading ? "Sending..." : "Send me"}
+                  </span>
+                  <span className="arrow-wrapper">
+                    <img src="/images/arrow-down.svg" alt="" aria-hidden="true" />
+                  </span>
+                </span>
+              </button>
+            </form>
           </div>
-          <div className="xl:col-span-5 min-h-96">
-            <div className="w-full h-full hover:cursor-grab flex items-center justify-center">
+          <div className="contact-side">
+            <div className="contact-side__top">
+              <span>Available for select projects</span>
+              <span className="contact-side__status">● Online</span>
+            </div>
+            <div className="contact-side__card">
               <ContactExperience />
             </div>
+            <p className="contact-side__note">
+              Let’s make something clear, useful, and worth remembering.
+            </p>
           </div>
         </div>
       </div>

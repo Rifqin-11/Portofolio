@@ -1,93 +1,154 @@
-import Button from "../components/Button";
+import { useEffect, useState } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import AnimatedCounter from "../components/AnimatedCounter";
-import type { HeroRole, ProfileContent, Stat } from "../lib/portfolio-types";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { HeroRole, ProfileContent, SocialLink } from "../lib/portfolio-types";
+import heroCharacter from "../../public/character/hero.png";
+import heroCharacterDark from "../../public/character/heroDark.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type HeroProps = {
   profile: ProfileContent;
   roles: HeroRole[];
-  stats: Stat[];
+  socialLinks: SocialLink[];
 };
 
-const Hero = ({ profile, roles, stats }: HeroProps) => {
-  useGSAP(() => {
-    gsap.fromTo(
-      ".hero-text h1",
-      {
-        y: 50,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power2.inOut",
-      }
-    );
-  });
+const Hero = ({ profile, roles, socialLinks }: HeroProps) => {
+  const [activeHeadlineIndex, setActiveHeadlineIndex] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
 
-  const rollingRoles = [...roles, ...roles];
+  const headlines = [
+    {
+      id: "profile-name",
+      text: profile.heroName,
+    },
+    ...roles.map((role) => ({
+      id: role.id,
+      text: role.text,
+    })),
+  ];
+
+  useEffect(() => {
+    if (roles.length === 0) {
+      return;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setActiveHeadlineIndex((currentIndex) =>
+        (currentIndex + 1) % (roles.length + 1)
+      );
+    }, 3500);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [roles.length]);
+
+  const activeHeadline = headlines[activeHeadlineIndex] ?? headlines[0];
+
+  useGSAP(
+    () => {
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      const characterImages = gsap.utils.toArray<HTMLElement>(
+        ".reference-character__image"
+      );
+
+      if (reducedMotion) {
+        gsap.set(characterImages, { scale: 1 });
+        return;
+      }
+
+      gsap.fromTo(
+        characterImages,
+        { scale: 1.5, force3D: false },
+        {
+          scale: 1,
+          ease: "none",
+          force3D: false,
+          scrollTrigger: {
+            trigger: ".hero-static",
+            start: "top top",
+            end: "bottom 25%",
+            scrub: 0.25,
+          },
+        }
+      );
+    },
+    { scope: heroRef }
+  );
 
   return (
-    <section id="hero" className="relative overflow-hidden">
-      <div className="absolute top-0 left-0 z-10">
-        <img src="/images/bg.png" alt="background" />
+    <section ref={heroRef} id="hero" className="hero-static">
+      <div className="reference-label reference-label-left">latest</div>
+
+      <div className="reference-label reference-label-right">Portofolio</div>
+
+      <div className="hero-connect">
+        <p className="hero-connect__label">Let's Connect:</p>
+        <nav className="hero-connect__links" aria-label="Social links">
+          {socialLinks.map((socialLink) => (
+            <a
+              key={socialLink.id}
+              href={socialLink.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`hero-connect__link icon-${socialLink.name}`}
+              aria-label={`Open ${socialLink.name}`}
+            >
+              <img src={socialLink.imgPath} alt="" aria-hidden="true" />
+            </a>
+          ))}
+        </nav>
       </div>
 
-      <div className="hero-layout">
-        {/* Left layout */}
-        <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
-          <div className="flex flex-col gap-7">
-            <div className="hero-text">
-              <h1>HI, I&apos;M {profile.heroName}</h1>
-              <h1>
-                {profile.heroPrefix}
-                <span className="slide">
-                  <span className="wrapper">
-                    {rollingRoles.map((word, index) => (
-                      <span
-                        key={`${word.id}-${index}`}
-                        className="flex items-center md:gap-3 gap-1"
-                      >
-                        <img
-                          src={word.imgPath}
-                          alt="person"
-                          className="xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50"
-                        />
-                        <span>{word.text}</span>
-                      </span>
-                    ))}
-                  </span>
-                </span>
-              </h1>
-            </div>
+      <figure className="reference-character">
+        <img
+          src={heroCharacter}
+          alt={`Illustrated portrait of ${profile.heroName}`}
+          className="reference-character__image reference-character__image--light"
+        />
+        <img
+          src={heroCharacterDark}
+          alt=""
+          aria-hidden="true"
+          className="reference-character__image reference-character__image--dark"
+        />
+      </figure>
 
-            <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl z-10 pointer-events-none">
-              {profile.heroSubtitle}
-            </p>
+      <h1 className="reference-name">
+        <span
+          className="reference-headline-slot"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span
+            key={`${activeHeadline.id}-${activeHeadlineIndex}`}
+            className={`reference-headline ${
+              activeHeadlineIndex === 0
+                ? "reference-headline--name"
+                : "reference-headline--role"
+            }`}
+          >
+            {activeHeadline.text}
+          </span>
+        </span>
+      </h1>
 
-            <Button
-              text="See My Work"
-              className="md:w-80 md:h-16 w-60 h-12"
-              id="counter"
-            />
-          </div>
-        </header>
-
-        {/* Right Layout */}
-        <figure className="">
-          <div className="xl:w-[35%] md:w-[50%] w-[90%] min-h-[50vh] absolute xl:top-1/2 md:top-150 top-130 -translate-y-1/2 left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-25">
-            <img
-              src={profile.profileImage}
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </figure>
-      </div>
-      <AnimatedCounter items={stats} />
+      <p className="reference-description">
+        I’m an Electrical Engineering graduate with a strong interest in
+        software development. I enjoy building web and mobile applications that
+        turn real-world problems into practical and user-friendly solutions. I’m
+        curious, adaptable, and always eager to learn new technologies through
+        hands-on projects.
+      </p>
     </section>
   );
 };

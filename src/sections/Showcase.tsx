@@ -1,7 +1,8 @@
+import type { CSSProperties } from "react";
 import { useRef } from "react";
-import { gsap } from "gsap/gsap-core";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Project } from "../lib/portfolio-types";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,131 +12,111 @@ type ShowcaseSectionProps = {
 };
 
 const ShowcaseSection = ({ projects }: ShowcaseSectionProps) => {
-  const sectionRef = useRef(null);
-  const imageFrameClass = (project: Project) =>
-    project.imageLayout === "full" ? "is-full" : "is-contained";
-  const imageFrameStyle = (project: Project) =>
-    project.imageLayout === "contained"
-      ? { backgroundColor: project.backgroundColor }
-      : undefined;
+  const sectionRef = useRef<HTMLElement>(null);
+  const visibleProjects = projects
+    .filter((project) => project.isActive)
+    .sort((a, b) => Number(b.featured) - Number(a.featured) || a.sortOrder - b.sortOrder);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      sectionRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1.5 }
-    );
+  const topProjects = visibleProjects.slice(0, 3);
+  const bottomProjects = visibleProjects.slice(3);
 
-    gsap.utils.toArray(".project").forEach((card, index) => {
-      gsap.fromTo(
-        card as Element,
-        {
-          y: 50,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          delay: 0.3 * (index + 1),
-          scrollTrigger: {
-            trigger: card as Element,
-            start: "top bottom-=100",
-          },
-        }
-      );
-    });
-  }, [projects]);
+  useGSAP(
+    () => {
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      const cards = gsap.utils.toArray<HTMLElement>(".work-card");
 
-  const featuredProject =
-    projects.find((project) => project.featured) ?? projects[0];
-  const regularProjects = projects.filter(
-    (project) => project.id !== featuredProject?.id
+      if (reducedMotion) {
+        gsap.set(cards, { clearProps: "all" });
+        return;
+      }
+
+      cards.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 72, scale: 0.86 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.95,
+            delay: index * 0.04,
+            ease: "back.out(1.35)",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      });
+    },
+    { scope: sectionRef }
   );
-  const sideProjects = regularProjects.slice(0, 2);
-  const gridProjects = regularProjects.slice(2);
+
+  const renderProject = (project: Project) => {
+    const index = visibleProjects.indexOf(project);
+    const cardStyle = { "--work-order": index } as CSSProperties;
+
+    return (
+      <article
+        className={`work-card${index === 0 ? " work-card--featured" : ""}`}
+        key={project.id}
+        style={cardStyle}
+      >
+        <a
+          className="work-card__link"
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${project.title}`}
+        >
+          <div
+            className="work-card__media"
+            style={{ backgroundColor: project.backgroundColor }}
+          >
+            <img
+              src={project.image}
+              alt=""
+              className={project.imageLayout === "full" ? "is-full" : "is-contained"}
+            />
+            <span className="work-card__number" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+
+          <div className="work-card__content">
+            <h3>{project.title}</h3>
+            {project.featured && project.description && <p>{project.description}</p>}
+          </div>
+        </a>
+      </article>
+    );
+  };
 
   return (
-    <div id="work" ref={sectionRef} className="app-showcase">
-      <div className="w-full">
-        <div className="showcaselayout">
-          {featuredProject && (
-            <div className="first-project-wrapper project">
-              <div
-                className={`image-wrapper ${imageFrameClass(featuredProject)}`}
-                style={imageFrameStyle(featuredProject)}
-              >
-                <img src={featuredProject.image} alt={featuredProject.title} />
-              </div>
-              <div className="text-content">
-                <a
-                  href={featuredProject.link}
-                  className="2xl:text-4xl xl:text-3xl md:text-xl lg:text-2xl font-semibold mt-5 hover:text-gray-400"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {featuredProject.title}
-                </a>
-                {featuredProject.description && (
-                  <p className="text-[var(--text-secondary)] dark:text-[var(--text-primary)] md:text-xl mt-5">
-                    {featuredProject.description}
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
-
-          <div className="project-list-wrapper overflow-hidden">
-            {sideProjects.map((project) => (
-              <div className="project" key={project.id}>
-                <div
-                  className={`image-wrapper ${imageFrameClass(project)}`}
-                  style={imageFrameStyle(project)}
-                >
-                  <img src={project.image} alt={project.title} />
-                </div>
-                <a
-                  className="hover:text-gray-400"
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {project.title}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="flex-row md:grid xl:grid-cols-2 gap-5 space-y-10 mt-10">
-          {gridProjects.map((project) => (
-            <div className="project flex flex-col items-start" key={project.id}>
-              <div
-                className={`image-wrapper ${imageFrameClass(project)} rounded-2xl w-full flex items-center justify-center overflow-hidden`}
-                style={imageFrameStyle(project)}
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className={
-                    project.imageLayout === "full"
-                      ? "h-full w-full object-cover"
-                      : "max-h-full max-w-full object-contain"
-                  }
-                />
-              </div>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg md:text-xl lg:text-2xl font-semibold hover:text-gray-400"
-              >
-                {project.title}
-              </a>
-            </div>
-          ))}
-        </div>
+    <section
+      ref={sectionRef}
+      id="work"
+      className="editorial-section work-section"
+    >
+      <div className="editorial-section__header work-section__header">
+        <p className="editorial-kicker">Selected work</p>
+        <h2>Things I have built.</h2>
       </div>
-    </div>
+
+      <div className="work-bento">
+        <div className="work-bento__top">
+          {topProjects.map(renderProject)}
+        </div>
+        {bottomProjects.length > 0 && (
+          <div className="work-bento__bottom">
+            {bottomProjects.map(renderProject)}
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 
